@@ -1,0 +1,23 @@
+{
+  "name": "studiometa/twig-toolkit",
+  "description": "A set of useful extension and components for Twig.",
+  "license": "MIT",
+  "version": "1.0.0-alpha.0",
+  "require": {
+    "php": ">=7.0"
+  },
+  "require-dev": {
+    "phpstan/phpstan": "^0.12.53",
+    "squizlabs/php_codesniffer": "^3.5",
+    "twig/twig": "^3.1"
+  },
+  "scripts": {
+    "phpcs": "phpcs",
+    "phpstan": "phpstan analyse"
+  },
+  "autoload": {
+    "psr-4": {
+      "Studiometa\\Twig\\": "src/"
+    }
+  }
+}
