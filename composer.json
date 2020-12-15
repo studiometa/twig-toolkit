@@ -6,7 +6,6 @@
   "require": {
     "php": ">=7.0",
     "twig/twig": "^3",
-    "windwalker/dom": "^3.5",
     "jawira/case-converter": "^3.4"
   },
   "require-dev": {
@@ -22,7 +21,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Studiometa\\Twig\\": "src/"
+      "Studiometa\\TwigToolkit\\": "src/"
     }
   }
 }

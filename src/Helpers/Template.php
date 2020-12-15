@@ -5,7 +5,7 @@
  * @license https://github.com/studiometa/twig-toolkit/blob/master/LICENSE
  */
 
-namespace Studiometa\Twig\Helpers;
+namespace Studiometa\TwigToolkit\Helpers;
 
 use Twig\Loader\FilesystemLoader;
 

@@ -10,12 +10,12 @@ composer require studiometa/twig-toolkit
 
 ## Usage
 
-Add the `Studiometa\Twig\Extension` to your Twig instance:
+Add the `Studiometa\TwigToolkit\Extension` to your Twig instance:
 
 ```php
 $loader = new \Twig\Loader\FilesystemLoader();
 $twig = new \Twig\Environment($loader);
-$twig->addExtension(new \Studiometa\Twig\Extension());
+$twig->addExtension(new \Studiometa\TwigToolkit\Extension());
 ```
 
 If you pass a `Twig\Loader\FilesystemLoader` instance to the extension constructor, a `meta` namespace pointing to the `templates/` folder of this package will be added. You will then be able to include components from this package with the `@meta` alias:
@@ -55,12 +55,35 @@ A function to manage classes more easily.
 <div class="foo bar"></div>
 ```
 
+#### `{{ attributes(<attrs>) }}`
+
+A function to render HTML attributes more easily with the following features:
+
+- The `class` attribute will automatically be processed by the `class` method described above
+- Array and objects will be converted to JSON
+- Attributes keys will be converted from any format to kebab-case
+- Values will be escaped to prevent XSS attacks
+
+**Params**
+- `attrs` (`Object`): The attributes to render
+
+**Examples**
+```twig
+<div {{ attributes({ id: 'one', data_options: { label: 'close' }, required: true }) }}></div>
+
+{# HTML #}
+<div id="one" data-options="{\"label\":\"close\"}" required></div>
+```
 
 ### Tags
 
 #### `{% element '<tag>' with attrs %}`
 
 Render an HTML element with the given attributes. Useful to avoid setting dynamic HTML element tags with the `<{{ tag }}>...</{{ tag }}>` pattern.
+
+**Params**
+- `tag` (`String`): The name of the tag
+- `attrs` (`Object`): An object describing the element's attribues
 
 **Examples**
 ```twig

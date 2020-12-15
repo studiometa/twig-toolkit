@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a1f8672a05483c1315fa1e2d0c7b9bb1",
+    "content-hash": "70793a749922693de7e667992cf70801",
     "packages": [
         {
             "name": "jawira/case-converter",
@@ -288,102 +288,6 @@
                 }
             ],
             "time": "2020-10-27T19:28:23+00:00"
-        },
-        {
-            "name": "windwalker/dom",
-            "version": "3.5.22",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/ventoviro/windwalker-dom.git",
-                "reference": "6f3e8000400480b8ce1b443c4621dc7f2b14e50c"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/ventoviro/windwalker-dom/zipball/6f3e8000400480b8ce1b443c4621dc7f2b14e50c",
-                "reference": "6f3e8000400480b8ce1b443c4621dc7f2b14e50c",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=7.1.3",
-                "windwalker/string": "~3.0"
-            },
-            "require-dev": {
-                "windwalker/test": "~3.0"
-            },
-            "type": "windwalker-package",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "3.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Windwalker\\Dom\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "LGPL-2.0-or-later"
-            ],
-            "description": "Windwalker Dom package",
-            "homepage": "https://github.com/ventoviro/windwalker-dom",
-            "keywords": [
-                "filesystem",
-                "framework",
-                "windwalker"
-            ],
-            "time": "2019-10-26T15:42:26+00:00"
-        },
-        {
-            "name": "windwalker/string",
-            "version": "3.5.22",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/ventoviro/windwalker-string.git",
-                "reference": "1db8752153d18a5f250bdb92f210b5475287a1d8"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/ventoviro/windwalker-string/zipball/1db8752153d18a5f250bdb92f210b5475287a1d8",
-                "reference": "1db8752153d18a5f250bdb92f210b5475287a1d8",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=7.1.3"
-            },
-            "require-dev": {
-                "windwalker/test": "~3.0",
-                "windwalker/utilities": "dev-master"
-            },
-            "suggest": {
-                "windwalker/utilities": "Install ~3.0 if you require SimpleTemplate template engine."
-            },
-            "type": "windwalker-package",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "3.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Windwalker\\String\\": ""
-                },
-                "files": [
-                    "functions.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "LGPL-2.0-or-later"
-            ],
-            "description": "Windwalker String package",
-            "homepage": "https://github.com/ventoviro/windwalker-string",
-            "keywords": [
-                "framework",
-                "string",
-                "windwalker"
-            ],
-            "time": "2020-08-07T03:24:32+00:00"
         }
     ],
     "packages-dev": [

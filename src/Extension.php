@@ -5,12 +5,12 @@
  * @license https://github.com/studiometa/twig-toolkit/blob/master/LICENSE
  */
 
-namespace Studiometa\Twig;
+namespace Studiometa\TwigToolkit;
 
-use Studiometa\Twig\Helpers\Html;
-use Studiometa\Twig\Helpers\Template;
-use Studiometa\Twig\Node\ElementNode;
-use Studiometa\Twig\TokenParser\ElementTokenParser;
+use Studiometa\TwigToolkit\Helpers\Html;
+use Studiometa\TwigToolkit\Helpers\Template;
+use Studiometa\TwigToolkit\Node\ElementNode;
+use Studiometa\TwigToolkit\TokenParser\ElementTokenParser;
 
 use Twig\Extension\AbstractExtension;
 use Twig\Loader\FilesystemLoader;
@@ -58,6 +58,7 @@ class Extension extends AbstractExtension
     {
         return [
             new TwigFunction('class', [Html::class, 'renderClass']),
+            new TwigFunction('attributes', [Html::class, 'renderAttributes'], ['needs_environment' => true, 'is_safe' => ['html']]),
         ];
     }
 }

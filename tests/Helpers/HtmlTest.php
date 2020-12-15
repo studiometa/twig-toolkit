@@ -3,7 +3,7 @@
 beforeEach(function () {
     $loader = new \Twig\Loader\ArrayLoader(['index' => 'index']);
     $twig = new \Twig\Environment($loader);
-    $twig->addExtension(new \Studiometa\Twig\Extension());
+    $twig->addExtension(new \Studiometa\TwigToolkit\Extension());
     $this->loader = $loader;
     $this->twig = $twig;
 });
@@ -47,4 +47,12 @@ test('The `{{ class() }}` Twig function should work with an array of string and 
     EOD;
     $this->loader->setTemplate('index', $tpl);
     expect($this->twig->render('index'))->toBe('block foo m-4');
+});
+
+test('The `{{ attributes() }}` Twig function should render attributes', function() {
+    $tpl = <<<EOD
+    {{ attributes({ id: 'foo', class: ['block', { foo: true, bar: false }], required: true, aria_hidden: 'true' }) }}
+    EOD;
+    $this->loader->setTemplate('index', $tpl);
+    expect($this->twig->render('index'))->toBe(' id="foo" class="block&#x20;foo" required aria-hidden="true"');
 });

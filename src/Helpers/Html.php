@@ -5,7 +5,7 @@
  * @license https://github.com/studiometa/twig-toolkit/blob/master/LICENSE
  */
 
-namespace Studiometa\Twig\Helpers;
+namespace Studiometa\TwigToolkit\Helpers;
 
 use Twig\Environment;
 use Jawira\CaseConverter\Convert;
@@ -18,6 +18,29 @@ use Jawira\CaseConverter\Convert;
  */
 class Html
 {
+    /**
+     * List of self closing tags.
+     * @source https://sites.google.com/site/getsnippet/html/html5/list-of-html-self-closing-tags
+     */
+    const SELF_CLOSING_TAGS = [
+        'area',
+        'base',
+        'br',
+        'col',
+        'command',
+        'embed',
+        'hr',
+        'img',
+        'input',
+        'keygen',
+        'link',
+        'meta',
+        'param',
+        'source',
+        'track',
+        'wbr',
+    ];
+
     /**
      * Render an array, object or string as a class.
      *
@@ -61,22 +84,75 @@ class Html
     }
 
     /**
-     * Prepare an attributes array to be used with \Windwalker\Dom\Builder::buildAttributes.
-     * This method will json_encode any nested array.
+     * Render an array of attributes.
      *
-     * @param  array  $attrs A list of attributes.
-     * @return array         A formatted list of attributes.
+     * @example
+     * ```twig
+     * <div {{ attributes({ id: 'foo', ariaHidden: 'true' }) }}></div>
+     * ```
+     *
+     * @param  array  $attributes The attributes to render.
+     * @return string             The rendered attributes.
      */
-    public static function prepareAttributes(Environment $env, array $attrs):array
+    public static function renderAttributes(Environment $env, array $attributes):string
     {
-        $preparedAttrs = [];
-        foreach ($attrs as $key => $value) {
-            $key = (new Convert($key))->toKebab();
-            $value = is_array($value) ? json_encode($value) : $value;
+        $renderedAttributes = [''];
 
-            $preparedAttrs[$key] = twig_escape_filter($env, $value, 'html_attr', $env->getCharset());
+        foreach ($attributes as $key => $value) {
+            // Convert keys to kebab-case
+            $key = (new Convert($key))->toKebab();
+
+            // Push boolean attributes without value if true
+            if (is_bool($value) && $value) {
+                $renderedAttributes[] = $key;
+                continue;
+            }
+
+            // Format class attributes
+            if ($key === 'class') {
+                $value = static::renderClass($value);
+            }
+
+            if (is_array($value)) {
+                $value = json_encode($value);
+            }
+
+            $value = twig_escape_filter($env, $value, 'html_attr', $env->getCharset());
+
+            $renderedAttributes[] = sprintf('%s="%s"', $key, $value);
         }
 
-        return $preparedAttrs;
+        return implode(' ', $renderedAttributes);
+    }
+
+    /**
+     * Render an HTML tag with attributes and its content.
+     *
+     * @param  Environment $env        The Twig environment.
+     * @param  string      $name       The name of the tag.
+     * @param  array       $attributes A list of attributes.
+     * @param  string|null $content    The content of the tag.
+     * @return string                  The rendered markup.
+     */
+    public static function renderTag(Environment $env, string $name, array $attributes = [], string $content = null):string
+    {
+        $attributes = static::renderAttributes($env, $attributes);
+        $name = twig_escape_filter($env, $name, 'html_attr', $env->getCharset());
+
+        // Render self closing tags.
+        if (in_array($name, self::SELF_CLOSING_TAGS)) {
+            return sprintf('<%s%s />', $name, $attributes);
+        }
+
+        $openingTag = sprintf('<%s%s>', $name, $attributes);
+        $closingTag = sprintf('</%s>', $name);
+
+        $html = [
+            $openingTag,
+            empty($content) ? '' : $content,
+            $closingTag,
+        ];
+
+        return implode('', $html);
     }
 }

@@ -3,7 +3,7 @@
 beforeEach(function () {
     $loader = new \Twig\Loader\ArrayLoader(['index' => 'index']);
     $twig = new \Twig\Environment($loader);
-    $twig->addExtension(new \Studiometa\Twig\Extension());
+    $twig->addExtension(new \Studiometa\TwigToolkit\Extension());
     $this->loader = $loader;
     $this->twig = $twig;
 });
@@ -36,7 +36,8 @@ test('The `{% element %}` Twig tag should render with attributes.', function () 
 
 test('The `{% element %}` Twig tag should be able to render single elements.', function () {
     $tpl = <<<EOD
-    {% element "br" with { class: "foo", id: "baz" } %}{% endelement %}
+    {% set tag = 'br' %}
+    {% element tag with { class: "foo", id: "baz" } %}{% endelement %}
     EOD;
 
     $html = <<<EOD
