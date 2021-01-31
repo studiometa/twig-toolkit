@@ -5,7 +5,7 @@
   "license": "MIT",
   "require": {
     "php": ">=7.0",
-    "twig/twig": "^3",
+    "twig/twig": "^2.10|^3",
     "jawira/case-converter": "^3.4"
   },
   "require-dev": {
