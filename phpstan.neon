@@ -3,3 +3,6 @@ parameters:
     level: max
     paths:
         - src
+    checkMissingIterableValueType: false
+    scanDirectories:
+      - ./vendor/twig/twig/src/Extension/
