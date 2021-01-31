@@ -8,20 +8,20 @@ beforeEach(function () {
     $this->twig = $twig;
 });
 
-test('The `{% element %}` Twig tag should render without attributes.', function () {
+test('The `{% html_element %}` Twig tag should render without attributes.', function () {
     $tpl = <<<EOD
-    {% element 'p' %}Hello world!{% endelement %}
+    {% html_element 'p' %}Hello world!{% end_html_element %}
     EOD;
     $this->loader->setTemplate('index', $tpl);
     expect($this->twig->render('index'))->toBe('<p>Hello world!</p>');
 });
 
-test('The `{% element %}` Twig tag should render with attributes.', function () {
+test('The `{% html_element %}` Twig tag should render with attributes.', function () {
     $tpl = <<<EOD
     {% set bar = "bar" %}
-    {% element "p" with { class: "foo", id: "baz" } %}
+    {% html_element "p" with { class: "foo", id: "baz" } %}
         {{ bar }}
-    {% endelement %}
+    {% end_html_element %}
     EOD;
 
     $html = <<<EOD
@@ -34,10 +34,10 @@ test('The `{% element %}` Twig tag should render with attributes.', function () 
     expect($this->twig->render('index'))->toBe($html);
 });
 
-test('The `{% element %}` Twig tag should be able to render single elements.', function () {
+test('The `{% html_element %}` Twig tag should be able to render single elements.', function () {
     $tpl = <<<EOD
     {% set tag = 'br' %}
-    {% element tag with { class: "foo", id: "baz" } %}{% endelement %}
+    {% html_element tag with { class: "foo", id: "baz" } %}{% end_html_element %}
     EOD;
 
     $html = <<<EOD
@@ -48,12 +48,12 @@ test('The `{% element %}` Twig tag should be able to render single elements.', f
     expect($this->twig->render('index'))->toBe($html);
 });
 
-test('The `{% element %}` Twig tag should be able to render dynamic elements.', function () {
+test('The `{% html_element %}` Twig tag should be able to render dynamic elements.', function () {
     $tpl = <<<EOD
     {% set tag = 'p' %}
-    {% element tag %}
+    {% html_element tag %}
         Hello world
-    {% endelement %}
+    {% end_html_element %}
     EOD;
 
     $html = <<<EOD
@@ -66,11 +66,11 @@ test('The `{% element %}` Twig tag should be able to render dynamic elements.', 
     expect($this->twig->render('index'))->toBe($html);
 });
 
-test('The `{% element %}` Twig tag should be able to render complex attributes.', function () {
+test('The `{% html_element %}` Twig tag should be able to render complex attributes.', function () {
     $tpl = <<<EOD
-    {% element 'div' with { aria_hidden: 'true', dataOptions: { log: true } } %}
+    {% html_element 'div' with { aria_hidden: 'true', dataOptions: { log: true } } %}
         Hello world
-    {% endelement %}
+    {% end_html_element %}
     EOD;
 
     $html = <<<EOD

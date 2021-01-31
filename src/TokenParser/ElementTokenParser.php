@@ -18,12 +18,12 @@ use Twig\TokenStream;
  *
  * @example
  * ```twig
- * {% element 'h1' with { class: 'foo', id: 'bar '} %}
+ * {% html_element 'h1' with { class: 'foo', id: 'bar '} %}
  *   Hello world
- * {% endelement %}
+ * {% end_html_element %}
  *
  * {% set tag = 'h1' %}
- * {% element tag %}Hello{% end %}
+ * {% html_element %}Hello{% end_html_element %}
  * ```
  *
  * @author Studio Meta <agence@studiometa.fr>
@@ -66,7 +66,7 @@ final class ElementTokenParser extends AbstractTokenParser
      */
     public function getTag()
     {
-        return 'element';
+        return 'html_element';
     }
 
     /**
@@ -75,6 +75,6 @@ final class ElementTokenParser extends AbstractTokenParser
      */
     public function decideBlockEnd(Token $token): bool
     {
-        return $token->test('endelement');
+        return $token->test('end_html_element');
     }
 }

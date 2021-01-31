@@ -38,10 +38,10 @@ When provided with a `\Twig\Loader\FilesystemLoader` parameter, the extension wi
 
 #### `{{ class(<classes>) }}`
 
-A function to manage classes more easily. 
+A function to manage classes more easily.
 
 **Params**
-- `classes` (`String | Array | Object`) 
+- `classes` (`String | Array | Object`)
 
 **Examples**
 ```twig
@@ -77,7 +77,7 @@ A function to render HTML attributes more easily with the following features:
 
 ### Tags
 
-#### `{% element '<tag>' with attrs %}`
+#### `{% html_element '<tag>' with attrs %}`
 
 Render an HTML element with the given attributes. Useful to avoid setting dynamic HTML element tags with the `<{{ tag }}>...</{{ tag }}>` pattern.
 
@@ -88,9 +88,9 @@ Render an HTML element with the given attributes. Useful to avoid setting dynami
 **Examples**
 ```twig
 {# Twig #}
-{% element 'h1' with { class: 'block' } %}
+{% html_element 'h1' with { class: 'block' } %}
   Hello world
-{% endelement %}
+{% end_html_element %}
 
 {# HTML #}
 <h1 class="block">
