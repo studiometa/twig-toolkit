@@ -1,11 +1,11 @@
 {
   "name": "studiometa/twig-toolkit",
+  "version": "1.0.0",
   "description": "A set of useful extension and components for Twig.",
   "license": "MIT",
-  "version": "1.0.0-alpha.0",
   "require": {
     "php": ">=7.0",
-    "twig/twig": "^3",
+    "twig/twig": "^2.10|^3",
     "jawira/case-converter": "^3.4"
   },
   "require-dev": {
