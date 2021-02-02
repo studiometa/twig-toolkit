@@ -102,9 +102,11 @@ class Html
             // Convert keys to kebab-case
             $key = (new Convert($key))->toKebab();
 
-            // Push boolean attributes without value if true
-            if (is_bool($value) && $value) {
-                $renderedAttributes[] = $key;
+            // Push boolean attributes without value if true and skip to the next attribute
+            if (is_bool($value)) {
+                if ($value) {
+                    $renderedAttributes[] = $key;
+                }
                 continue;
             }
 
