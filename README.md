@@ -36,7 +36,7 @@ When provided with a `\Twig\Loader\FilesystemLoader` parameter, the extension wi
 
 ### Functions
 
-#### `{{ class(<classes>) }}`
+#### `{{ html_classes(<classes>) }}`
 
 A function to manage classes more easily.
 
@@ -46,16 +46,16 @@ A function to manage classes more easily.
 **Examples**
 ```twig
 {# The following examples will render the same HTML #}
-<div class="{{ class('foo bar') }}"></div>
-<div class="{{ class(['foo', 'bar']) }}"></div>
-<div class="{{ class({ foo: true, bar: true, baz: false }) }}"></div>
-<div class="{{ class(['foo', { bar: true, baz: false }]) }}"></div>
+<div class="{{ html_classes('foo bar') }}"></div>
+<div class="{{ html_classes(['foo', 'bar']) }}"></div>
+<div class="{{ html_classes({ foo: true, bar: true, baz: false }) }}"></div>
+<div class="{{ html_classes(['foo', { bar: true, baz: false }]) }}"></div>
 
 {# HTML #}
 <div class="foo bar"></div>
 ```
 
-#### `{{ attributes(<attrs>) }}`
+#### `{{ html_attributes(<attrs>) }}`
 
 A function to render HTML attributes more easily with the following features:
 
@@ -69,7 +69,7 @@ A function to render HTML attributes more easily with the following features:
 
 **Examples**
 ```twig
-<div {{ attributes({ id: 'one', data_options: { label: 'close' }, required: true }) }}></div>
+<div {{ html_attributes({ id: 'one', data_options: { label: 'close' }, required: true }) }}></div>
 
 {# HTML #}
 <div id="one" data-options="{\"label\":\"close\"}" required></div>
