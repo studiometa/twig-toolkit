@@ -8,51 +8,59 @@ beforeEach(function () {
     $this->twig = $twig;
 });
 
-test('The `{{ class() }}` Twig function should accept a string parameter.', function () {
+test('The `{{ html_classes() }}` Twig function should accept a string parameter.', function () {
     $tpl = <<<EOD
-    {{ class('block m-4') }}
+    {{ html_classes('block m-4') }}
     EOD;
     $this->loader->setTemplate('index', $tpl);
     expect($this->twig->render('index'))->toBe('block m-4');
 });
 
-test('The `{{ class() }}` Twig function should accept an array of string parameter.', function () {
+test('The `{{ html_classes() }}` Twig function should accept an array of string parameter.', function () {
     $tpl = <<<EOD
-    {{ class(['block', 'm-4']) }}
+    {{ html_classes(['block', 'm-4']) }}
     EOD;
     $this->loader->setTemplate('index', $tpl);
     expect($this->twig->render('index'))->toBe('block m-4');
 });
 
-test('The `{{ class() }}` Twig function should accept an object parameter', function () {
+test('The `{{ html_classes() }}` Twig function should accept an object parameter', function () {
     $tpl = <<<EOD
-    {{ class({ block: true, hidden: null, relative: false }) }}
+    {{ html_classes({ block: true, hidden: null, relative: false }) }}
     EOD;
     $this->loader->setTemplate('index', $tpl);
     expect($this->twig->render('index'))->toBe('block');
 });
 
-test('The `{{ class() }}` Twig function should work with dynamic test values.', function () {
+test('The `{{ html_classes() }}` Twig function should work with dynamic test values.', function () {
     $tpl = <<<EOD
     {% set is_block = true %}
-    {{ class({ block: is_block, relative: not is_block }) }}
+    {{ html_classes({ block: is_block, relative: not is_block }) }}
     EOD;
     $this->loader->setTemplate('index', $tpl);
     expect($this->twig->render('index'))->toBe('block');
 });
 
-test('The `{{ class() }}` Twig function should work with an array of string and object parameter.', function () {
+test('The `{{ html_classes() }}` Twig function should work with an array of string and object parameter.', function () {
     $tpl = <<<EOD
-    {{ class(['block', { foo: true, bar: false, }, 'm-4']) }}
+    {{ html_classes(['block', { foo: true, bar: false, }, 'm-4']) }}
     EOD;
     $this->loader->setTemplate('index', $tpl);
     expect($this->twig->render('index'))->toBe('block foo m-4');
 });
 
-test('The `{{ attributes() }}` Twig function should render attributes', function() {
+test('The `{{ html_attributes() }}` Twig function should render attributes', function() {
     $tpl = <<<EOD
-    {{ attributes({ id: 'foo', class: ['block', { foo: true, bar: false }], required: true, aria_hidden: 'true' }) }}
+    {{ html_attributes({ id: 'foo', class: ['block', { foo: true, bar: false }], required: true, aria_hidden: 'true' }) }}
     EOD;
     $this->loader->setTemplate('index', $tpl);
     expect($this->twig->render('index'))->toBe(' id="foo" class="block&#x20;foo" required aria-hidden="true"');
+});
+
+test('The `{{ html_attributes() }}` Twig function should not render falsy attributes', function() {
+    $tpl = <<<EOD
+    {{ html_attributes({ checked: true, autofocus: true, selected: false }) }}
+    EOD;
+    $this->loader->setTemplate('index', $tpl);
+    expect($this->twig->render('index'))->toBe(' checked autofocus');
 });
