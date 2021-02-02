@@ -49,7 +49,15 @@ test('The `{{ html_classes() }}` Twig function should work with an array of stri
     expect($this->twig->render('index'))->toBe('block foo m-4');
 });
 
-test('The `{{ html_attributes() }}` Twig function should render attributes', function() {
+test('The `{{ html_styles() }}` Twig function should render inline CSS.', function () {
+    $tpl = <<<EOD
+    {{ html_styles({ display: 'none', marginRight: '', overflow: 0 != 0, margin_top: '10px' }) }}
+    EOD;
+    $this->loader->setTemplate('index', $tpl);
+    expect($this->twig->render('index'))->toBe('display: none; margin-top: 10px;');
+});
+
+test('The `{{ html_attributes() }}` Twig function should render attributes', function () {
     $tpl = <<<EOD
     {{ html_attributes({ id: 'foo', class: ['block', { foo: true, bar: false }], required: true, aria_hidden: 'true' }) }}
     EOD;
@@ -57,7 +65,7 @@ test('The `{{ html_attributes() }}` Twig function should render attributes', fun
     expect($this->twig->render('index'))->toBe(' id="foo" class="block&#x20;foo" required aria-hidden="true"');
 });
 
-test('The `{{ html_attributes() }}` Twig function should not render falsy attributes', function() {
+test('The `{{ html_attributes() }}` Twig function should not render falsy attributes', function () {
     $tpl = <<<EOD
     {{ html_attributes({ checked: true, autofocus: true, selected: false }) }}
     EOD;

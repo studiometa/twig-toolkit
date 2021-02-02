@@ -84,6 +84,37 @@ class Html
     }
 
     /**
+     * Render an array of CSS styles into a valid CSS string.
+     *
+     * @example
+     * ```php
+     * Html::renderStyleAttribute(['display' => 'none', 'pointer-events' => 'none']);
+     * // 'display: none; pointer-events: none;'
+     * ```
+     *
+     * @param  array  $styles The styles to render.
+     * @return string         The rendered styles.
+     */
+    public static function renderStyleAttribute(array $styles):string
+    {
+        $renderedStyle = [];
+
+        foreach ($styles as $property => $value) {
+            // Skip boolean values that are not true and empty strings
+            if (is_bool($value) && !$value || $value === '') {
+                continue;
+            }
+
+            // Convert property to kebab-case as it is the only
+            // valid case format for CSS properties.
+            $property = (new Convert($property))->toKebab();
+            $renderedStyle[] = sprintf('%s: %s;', $property, $value);
+        }
+
+        return implode(' ', $renderedStyle);
+    }
+
+    /**
      * Render an array of attributes.
      *
      * @example
@@ -113,6 +144,11 @@ class Html
             // Format class attributes
             if ($key === 'class') {
                 $value = static::renderClass($value);
+            }
+
+            // Format style attributes from array to string
+            if ($key === 'style' && is_array($value)) {
+                $value = static::renderStyleAttribute($value);
             }
 
             if (is_array($value)) {

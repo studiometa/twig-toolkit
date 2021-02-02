@@ -58,6 +58,22 @@ A function to manage classes more easily.
 <div class="foo bar"></div>
 ```
 
+#### `{{ html_styles(<styles>) }}`
+
+A function to manage style attributes more easily.
+
+**Params**
+- `styles` (`Object`)
+
+**Examples**
+```twig
+<div style="{{ html_styles({ display: 'none', margin_top: '10px' }) }}"></div>
+<div style="display: none; margin-top: 10px"></div>
+
+<div style="{{ html_styles({ display: false, opacity: 0 }) }}"></div>
+<div style="opacity: 0;"></div>
+```
+
 #### `{{ html_attributes(<attrs>) }}`
 
 A function to render HTML attributes more easily with the following features:
