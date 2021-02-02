@@ -1,5 +1,8 @@
 # Twig toolkit
 
+[![Packagist Version](https://img.shields.io/github/v/release/studiometa/twig-toolkit?include_prereleases&label=packagist&style=flat-square)](https://packagist.org/packages/studiometa/twig-toolkit)
+[![License MIT](https://img.shields.io/packagist/l/studiometa/twig-toolkit?style=flat-square)](https://github.com/studiometa/twig-toolkit/blob/master/LICENSE)
+
 > A set of useful extension and components for Twig.
 
 ## Installation
