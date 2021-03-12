@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "target": "es2017",
+    "module": "ES2015",
+    "lib": ["ESNext"],
+    "moduleResolution": "node",
+    "outDir": "dist",
+    "declaration": true,
+    "downlevelIteration": true,
+    "listEmittedFiles": true,
+    "baseUrl": ".",
+    "paths": {
+      "~/*": ["src/*"]
+    }
+  },
+  "include": [
+    "src/**/*.ts"
+  ]
+}
