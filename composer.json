@@ -23,5 +23,8 @@
     "psr-4": {
       "Studiometa\\TwigToolkit\\": "src/"
     }
+  },
+  "archive": {
+    "exclude": ["npm"]
   }
 }
