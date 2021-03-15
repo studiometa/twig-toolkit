@@ -48,7 +48,7 @@ describe('The {{ html_classes() }} function', () => {
 describe('The `{{ html_styles() }}` Twig function', () => {
   it('should render inline CSS.', async () => {
     // eslint-disable-next-line max-len
-    const tpl = '{{ html_styles({ display: "none", marginRight: ", overflow: 0 != 0, margin_top: "10px" }) }}';
+    const tpl = '{{ html_styles({ display: "none", marginRight: "", overflow: 0 != 0, margin_top: "10px" }) }}';
     loader.setTemplate('index', tpl);
     expect(await twig.render('index')).toBe('display: none; margin-top: 10px;');
   });

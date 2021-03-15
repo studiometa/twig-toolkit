@@ -6,14 +6,6 @@ export default {
   // Indicates which provider should be used to instrument code for coverage
   coverageProvider: 'v8',
 
-  // A set of global variables that need to be available in all test environments
-  globals: {
-    "ts-jest": {
-      "tsconfig": "tsconfig.json",
-      "diagnostics": true
-    }
-  },
-
   moduleNameMapper: {
     // Map js import from source to TS files
     '/Helpers/Html.js$': '<rootDir>/src/Helpers/Html.ts',

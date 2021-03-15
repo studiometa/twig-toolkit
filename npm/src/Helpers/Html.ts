@@ -152,8 +152,12 @@ export class Html {
         value = await Html.renderStyleAttribute(value as Styles);
       }
 
-      if (typeof value !== 'string' && value instanceof Map) {
-        value = JSON.stringify(Html.mapToObject(value));
+      if (typeof value !== 'string') {
+        if (value instanceof Map) {
+          value = JSON.stringify(Html.mapToObject(value));
+        } else {
+          value = JSON.stringify(value);
+        }
       }
 
       value = await escape(

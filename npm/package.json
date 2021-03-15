@@ -20,7 +20,7 @@
     "build": "npm run build:src && npm run build:templates",
     "build:src": "rm -r dist && tsc",
     "build:templates": "rsync -avh ../templates/ ./templates/",
-    "test": "npm run build && jest",
+    "test": "jest",
     "prepublishOnly": "npm run test && npm run build",
     "postinstall": "rsync -avh node_modules/twing/dist/types/ node_modules/twing/dist/es/"
   },
