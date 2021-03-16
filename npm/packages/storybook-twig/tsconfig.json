@@ -1,0 +1,12 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "resolveJsonModule": true,
+    "rootDir": "./src",
+    "outDir": "dist",
+    "module": "commonjs"
+  },
+  "include": [
+    "src/**/*"
+  ]
+}

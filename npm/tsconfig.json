@@ -6,16 +6,8 @@
     "module": "ES2015",
     "lib": ["ESNext", "DOM"],
     "moduleResolution": "node",
-    "outDir": "dist",
     "declaration": true,
     "downlevelIteration": true,
-    "listEmittedFiles": true,
-    "baseUrl": ".",
-    "paths": {
-      "~/*": ["src/*"]
-    }
-  },
-  "include": [
-    "src/**/*.ts"
-  ]
+    "listEmittedFiles": true
+  }
 }

@@ -1,0 +1,46 @@
+{
+  "name": "@studiometa/storybook-twig",
+  "version": "1.0.0",
+  "description": "Storybook for Twi(n)g.",
+  "keywords": [
+    "storybook",
+    "twig",
+    "twing"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "type": "commonjs",
+  "files": [
+    "bin/",
+    "dist/",
+    "README.md"
+  ],
+  "main": "dist/client/index.js",
+  "types": "dist/client/index.d.ts",
+  "bin": {
+    "build-storybook": "./bin/build.js",
+    "start-storybook": "./bin/index.js",
+    "storybook-server": "./bin/index.js"
+  },
+  "scripts": {
+    "build": "tsc"
+  },
+  "dependencies": {
+    "@storybook/addons": "^6.1.21",
+    "@storybook/client-api": "^6.1.21",
+    "@storybook/core": "^6.1.21",
+    "@studiometa/twig-toolkit": "file:../twig-toolkit",
+    "global": "^4.4.0",
+    "react": "16.13.1",
+    "react-docgen-typescript-plugin": "^0.7.0",
+    "react-dom": "16.13.1",
+    "read-pkg-up": "^7.0.1",
+    "ts-dedent": "^1.1.1",
+    "twing": "^5.0.2",
+    "twing-loader": "github:studiometa/twing-loader#5"
+  },
+  "peerDependencies": {
+    "@babel/core": "*"
+  }
+}

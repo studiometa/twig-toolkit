@@ -1,4 +1,5 @@
 import { TwingLoaderFilesystem, TwingEnvironment } from 'twing';
+// eslint-disable-next-line import/no-unresolved
 import { Extension } from '../src/Extension.js';
 
 test('The extension should add the `@meta` namespace when given a `loader`.', () => {

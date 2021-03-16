@@ -5,7 +5,10 @@
  */
 
 import {
-  TwingExtension, TwingLoaderFilesystem, TwingTokenParser, TwingFunction,
+  TwingExtension,
+  TwingLoaderFilesystem,
+  TwingTokenParser,
+  TwingFunction,
 } from 'twing';
 // eslint-disable-next-line import/no-unresolved
 import { Html } from './Helpers/Html.js';
@@ -60,15 +63,10 @@ export class Extension extends TwingExtension {
       }),
       new TwingFunction('html_classes', Html.renderClass, [{ name: 'classes' }]),
       new TwingFunction('html_styles', Html.renderStyleAttribute, []),
-      new TwingFunction(
-        'html_attributes',
-        Html.renderAttributes,
-        [{ name: 'attributes' }],
-        {
-          is_safe: [ 'html' ],
-          needs_template: true,
-        },
-      ),
+      new TwingFunction('html_attributes', Html.renderAttributes, [{ name: 'attributes' }], {
+        is_safe: [ 'html' ],
+        needs_template: true,
+      }),
     ];
     /* eslint-enable camelcase */
   }
@@ -77,7 +75,7 @@ export class Extension extends TwingExtension {
    * Get the Html helper class.
    * @return {Html}
    */
-  public get Html():Html {
+  public get Html(): Html {
     return Html;
   }
 }

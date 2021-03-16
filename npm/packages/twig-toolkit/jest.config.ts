@@ -11,7 +11,8 @@ export default {
     '/Helpers/Html.js$': '<rootDir>/src/Helpers/Html.ts',
     '/Helpers/Template.js$': '<rootDir>/src/Helpers/Template.ts',
     '/Node/HtmlElementNode.js$': '<rootDir>/src/Node/HtmlElementNode.ts',
-    '/TokenParser/HtmlElementTokenParser.js$': '<rootDir>/src/TokenParser/HtmlElementTokenParser.ts',
+    '/TokenParser/HtmlElementTokenParser.js$':
+      '<rootDir>/src/TokenParser/HtmlElementTokenParser.ts',
     '/Extension.js$': '<rootDir>/src/Extension.ts',
   },
 
@@ -23,6 +24,6 @@ export default {
     '^.+\\.(j|t)sx?$': 'esbuild-jest',
   },
 
-  // An array of regexp pattern strings that are matched against all source file paths, matched files will skip transformation
+  // An array of regexp pattern strings that are matched against all source file paths
   transformIgnorePatterns: [],
 };

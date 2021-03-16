@@ -1,0 +1,15 @@
+{
+  "name": "@studiometa/storybook-twig-example",
+  "private": true,
+  "scripts": {
+    "storybook": "start-storybook -p 9001",
+    "storybook:build": "build-storybook -p 9001"
+  },
+  "devDependencies": {
+    "@storybook/addon-essentials": "^6.1.21",
+    "@storybook/core": "^6.1.21",
+    "@studiometa/storybook-twig": "file:../storybook-twig",
+    "react": "16.13.1",
+    "react-dom": "16.13.1"
+  }
+}

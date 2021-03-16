@@ -1,4 +1,5 @@
 import { TwingEnvironment, TwingLoaderArray } from 'twing';
+// eslint-disable-next-line import/no-unresolved
 import { Extension } from '../../src/Extension.js';
 
 let loader: TwingLoaderArray;

@@ -1,5 +1,6 @@
 import { TwingLoaderFilesystem } from 'twing';
 import { resolve } from 'path';
+// eslint-disable-next-line import/no-unresolved
 import { Template } from '../../src/Helpers/Template.js';
 
 let loader;
