@@ -19,6 +19,6 @@ export class Template {
      * @param {TwingLoadeFilesystem} $loader The loader to extend.
      */
   public static addMetaNamespace($loader:TwingLoaderFilesystem):void {
-    $loader.addPath(resolve(__dirname, '../../templates'), 'meta');
+    $loader.addPath(resolve(__dirname, '../../../templates'), 'meta');
   }
 }

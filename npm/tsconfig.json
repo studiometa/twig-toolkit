@@ -4,7 +4,7 @@
     "forceConsistentCasingInFileNames": true,
     "target": "es2017",
     "module": "ES2015",
-    "lib": ["ESNext"],
+    "lib": ["ESNext", "DOM"],
     "moduleResolution": "node",
     "outDir": "dist",
     "declaration": true,

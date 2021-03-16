@@ -5,7 +5,7 @@
  */
 
 import { TwingTokenParser, TwingNode } from 'twing';
-import { TwingNodeType } from 'twing/dist/es/lib/node-type.js';
+import { TwingNodeType } from 'twing/dist/cjs/lib/node-type.js';
 import { Token, TokenType } from 'twig-lexer';
 // eslint-disable-next-line import/no-unresolved
 import { HtmlElementNode } from '../Node/HtmlElementNode.js';

@@ -4,8 +4,8 @@
  * @license https://github.com/studiometa/twig-toolkit/blob/master/LICENSE
  */
 
-import { TwingTemplate } from 'twing/dist/es/lib/template.js';
-import { escape } from 'twing/dist/es/lib/extension/core/filters/escape.js';
+import { TwingTemplate } from 'twing/dist/cjs/lib/template.js';
+import { escape } from 'twing/dist/cjs/lib/extension/core/filters/escape.js';
 import toKebab from 'lodash/kebabCase.js';
 
 export type Classes = string | Map<string, boolean> | Map<number, Classes>;

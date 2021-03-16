@@ -2,8 +2,8 @@
   "name": "@studiometa/twig-toolkit",
   "version": "1.0.0",
   "description": "A set of useful extension and components for Twig.",
-  "main": "dist/Extension.js",
-  "types": "dist/Extension.d.ts",
+  "main": "dist/es/Extension.js",
+  "types": "dist/es/Extension.d.ts",
   "type": "module",
   "files": [
     "dist/",
@@ -13,16 +13,26 @@
     "."
   ],
   "exports": {
-    "./": "./dist/"
+    ".": {
+      "import": "./dist/es/Extension.js",
+      "require": "./dist/cjs/Extension.js"
+    },
+    "./": {
+      "import": "./dist/es/",
+      "require": "./dist/cjs/"
+    }
   },
   "scripts": {
     "lint": "eslint src/",
-    "build": "npm run build:src && npm run build:templates",
-    "build:src": "rm -r dist && tsc",
+    "build": "rm -r dist && npm run build:es && npm run build:cjs && npm run build:templates",
+    "build:es": "tsc --outDir dist/es",
+    "build:cjs": "tsc --outDir dist/cjs --module commonjs && echo '{\"type\":\"commonjs\"}' > dist/cjs/package.json",
     "build:templates": "rsync -avh ../templates/ ./templates/",
     "test": "jest",
     "prepublishOnly": "npm run test && npm run build",
-    "postinstall": "rsync -avh node_modules/twing/dist/types/ node_modules/twing/dist/es/"
+    "postinstall": "rsync -avh node_modules/twing/dist/types/ node_modules/twing/dist/cjs/",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "repository": {
     "type": "git",
