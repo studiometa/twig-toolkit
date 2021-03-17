@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "storybook": "start-storybook -p 9001",
-    "storybook:build": "build-storybook -p 9001"
+    "storybook:build": "build-storybook"
   },
   "devDependencies": {
     "@storybook/addon-essentials": "^6.1.21",

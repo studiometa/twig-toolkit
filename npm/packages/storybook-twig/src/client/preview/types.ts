@@ -1,7 +1,9 @@
 export { RenderContext } from '@storybook/core';
 
+export type TwigTemplate = (props: unknown) => Promise<string>;
+
 export type StoryFnTwigReturnType = {
-  component?: (props: unknown) => Promise<string>,
+  component?: TwigTemplate,
   props?: unknown,
 };
 

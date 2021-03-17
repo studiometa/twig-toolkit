@@ -2,7 +2,7 @@ import { document, Node } from 'global';
 import dedent from 'ts-dedent';
 import { simulatePageLoad, simulateDOMContentLoaded } from '@storybook/client-api';
 // eslint-disable-next-line import/no-unresolved
-import { RenderContext } from './types.js';
+import { RenderContext, TwigTemplate } from './types.js';
 
 const rootElement = document.getElementById('root');
 
@@ -41,8 +41,6 @@ function renderElement(
   }
 }
 
-type TwigTemplate = (props: unknown) => Promise<string>;
-
 /**
  * Render a story.
  * @param {RenderContext} context
@@ -66,7 +64,6 @@ export default function renderMain(context: RenderContext): void {
     return;
   }
   const template: TwigTemplate = config.component || parameters.component;
-
   template(config.props || {})
     .then((renderedElement) => renderElement(renderedElement, context))
     .catch((err) => {

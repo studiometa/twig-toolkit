@@ -1,9 +1,15 @@
 import './Button.css';
-import Button from './Button.twig';
+import ButtonTemplate from './Button.twig';
+import Button from './Button.js';
+
+let btn;
+window.addEventListener('DOMContentLoaded', () => {
+  btn = new Button();
+});
 
 export default {
   title: 'Button',
-  component: Button,
+  component: ButtonTemplate,
   argTypes: {
     label: { control: 'text' },
     level: { control: { type: 'select', options: ['primary', 'secondary'] } },
