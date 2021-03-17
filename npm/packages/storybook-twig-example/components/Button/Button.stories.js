@@ -2,10 +2,7 @@ import './Button.css';
 import ButtonTemplate from './Button.twig';
 import Button from './Button.js';
 
-let btn;
-window.addEventListener('DOMContentLoaded', () => {
-  btn = new Button();
-});
+window.addEventListener('DOMContentLoaded', () => new Button());
 
 export default {
   title: 'Button',
