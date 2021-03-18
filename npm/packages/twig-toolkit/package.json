@@ -29,7 +29,7 @@
     "build:templates": "rsync -avh ../../../templates/ ./templates/",
     "test": "jest",
     "prepublishOnly": "npm run test && npm run build",
-    "postinstall": "rsync -avh node_modules/twing/dist/types/ node_modules/twing/dist/cjs/"
+    "postinstall": "if [ -d 'node_modules/twing' ]; then rsync -ahP node_modules/twing/dist/types/ node_modules/twing/dist/cjs/; fi;"
   },
   "repository": {
     "type": "git",

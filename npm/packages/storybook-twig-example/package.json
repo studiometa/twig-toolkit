@@ -8,8 +8,10 @@
   "devDependencies": {
     "@storybook/addon-essentials": "^6.1.21",
     "@storybook/core": "^6.1.21",
-    "@studiometa/storybook-twig": "file:../storybook-twig",
+    "@studiometa/storybook-twig": "*",
+    "core-js": "^3.9.1",
     "react": "16.13.1",
-    "react-dom": "16.13.1"
+    "react-dom": "16.13.1",
+    "regenerator-runtime": "^0.13.7"
   }
 }
