@@ -6,6 +6,7 @@
 
 import { TwingLoaderFilesystem } from 'twing';
 import { resolve } from 'path';
+import findUp from 'find-up';
 
 /**
  * Template helper class.
@@ -18,7 +19,10 @@ export class Template {
      * Add the component's path to the given Twig file system loader.
      * @param {TwingLoadeFilesystem} $loader The loader to extend.
      */
-  public static addMetaNamespace($loader:TwingLoaderFilesystem):void {
-    $loader.addPath(resolve(__dirname, '../../../templates'), 'meta');
+  public static addMetaNamespace(loader:TwingLoaderFilesystem):void {
+    const path = findUp.sync('templates', { cwd: __dirname, type: 'directory' });
+    if (path) {
+      loader.addPath(path, 'meta');
+    }
   }
 }

@@ -33,7 +33,7 @@ export class Extension extends TwingExtension {
    */
   constructor(loader: TwingLoaderFilesystem = null) {
     super();
-    if (loader) {
+    if (loader && loader instanceof TwingLoaderFilesystem) {
       Template.addMetaNamespace(loader);
     }
   }

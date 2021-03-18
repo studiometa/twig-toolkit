@@ -48,6 +48,7 @@
   },
   "homepage": "https://github.com/studiometa/twig-toolkit#readme",
   "dependencies": {
+    "find-up": "^5.0.0",
     "lodash": "^4.17.21",
     "twig-lexer": "^0.7.2",
     "twing": "^5.0.2"
