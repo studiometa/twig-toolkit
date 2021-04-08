@@ -6,8 +6,9 @@
     "storybook:build": "build-storybook"
   },
   "devDependencies": {
-    "@storybook/addon-essentials": "^6.1.21",
-    "@storybook/core": "^6.1.21",
+    "@storybook/addon-essentials": "^6.2",
+    "@storybook/core": "^6.2",
+    "@storybook/builder-webpack5": "^6.2",
     "@studiometa/storybook-twig": "*",
     "core-js": "^3.9.1",
     "react": "16.13.1",

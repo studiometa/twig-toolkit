@@ -29,7 +29,9 @@ export const storiesOf: ClientApi['storiesOf'] = (kind, m) => (api.clientApi.sto
 });
 
 export const configure: ClientApi['configure'] = (...args) => api.configure(framework, ...args);
+// @ts-ignore
 export const addDecorator: ClientApi['addDecorator'] = api.clientApi.addDecorator;
+// @ts-ignore
 export const addParameters: ClientApi['addParameters'] = api.clientApi.addParameters;
 export const clearDecorators: ClientApi['clearDecorators'] = api.clientApi.clearDecorators;
 export const setAddon: ClientApi['setAddon'] = api.clientApi.setAddon;

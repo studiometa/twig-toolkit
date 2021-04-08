@@ -23,10 +23,9 @@
     }
   },
   "scripts": {
-    "build": "rm -r dist && npm run build:es && npm run build:cjs && npm run build:templates",
+    "build": "rm -rf dist && npm run build:es && npm run build:cjs",
     "build:es": "tsc --outDir dist/es",
     "build:cjs": "tsc --outDir dist/cjs --module commonjs && echo '{\"type\":\"commonjs\"}' > dist/cjs/package.json",
-    "build:templates": "rsync -avh ../../../templates/ ./templates/",
     "test": "jest",
     "prepublishOnly": "npm run test && npm run build",
     "postinstall": "if [ -d 'node_modules/twing' ]; then rsync -ahP node_modules/twing/dist/types/ node_modules/twing/dist/cjs/; fi;"
@@ -48,7 +47,6 @@
   },
   "homepage": "https://github.com/studiometa/twig-toolkit#readme",
   "dependencies": {
-    "find-up": "^5.0.0",
     "lodash": "^4.17.21",
     "twig-lexer": "^0.7.2",
     "twing": "^5.0.2"
