@@ -2,13 +2,12 @@
   "name": "@studiometa/storybook-twig-example",
   "private": true,
   "scripts": {
-    "storybook": "start-storybook -p 9001",
+    "storybook": "start-storybook",
     "storybook:build": "build-storybook"
   },
   "devDependencies": {
-    "@storybook/addon-essentials": "^6.2",
-    "@storybook/core": "^6.2",
-    "@storybook/builder-webpack5": "^6.2",
+    "@storybook/addon-essentials": "^6.2.7",
+    "@storybook/core": "^6.2.7",
     "@studiometa/storybook-twig": "*",
     "core-js": "^3.9.1",
     "react": "16.13.1",

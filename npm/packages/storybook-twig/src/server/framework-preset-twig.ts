@@ -9,26 +9,17 @@ import type { StorybookOptions } from './types.js';
  * @param {}
  */
 export function webpack(config: Configuration, { twigOptions }: StorybookOptions): Configuration {
-  return {
-    ...config,
-    module: {
-      ...config.module,
-      rules: [
-        ...config.module.rules,
-        {
-          test: /\.twig$/,
-          use: [
-            {
-              loader: require.resolve('twing-loader'),
-              options: {
-                environmentModulePath:
-                  twigOptions?.environmentModulePath
-                  || require.resolve('./default-twig-environment.js'),
-              },
-            },
-          ],
+  config.module.rules.push({
+    test: /\.twig$/,
+    use: [
+      {
+        loader: require.resolve('twing-loader'),
+        options: {
+          environmentModulePath:
+            twigOptions?.environmentModulePath || require.resolve('./default-twig-environment.js'),
         },
-      ],
-    },
-  };
+      },
+    ],
+  });
+  return config;
 }
