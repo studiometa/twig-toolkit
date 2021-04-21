@@ -63,6 +63,7 @@ class Extension extends AbstractExtension
             new TwigFunction('attributes', [Html::class, 'renderAttributes'], ['needs_environment' => true, 'is_safe' => ['html']]),
 
             new TwigFunction('html_classes', [Html::class, 'renderClass']),
+            new TwigFunction('html_styles', [Html::class, 'renderStyleAttribute']),
             new TwigFunction('html_attributes', [Html::class, 'renderAttributes'], ['needs_environment' => true, 'is_safe' => ['html']]),
         ];
     }
