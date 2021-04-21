@@ -1,6 +1,6 @@
 {
   "name": "@studiometa/storybook-twig",
-  "version": "6.2.7",
+  "version": "2.0.0",
   "description": "Storybook for Twi(n)g.",
   "keywords": [
     "storybook",
