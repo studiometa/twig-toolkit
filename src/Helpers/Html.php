@@ -122,14 +122,32 @@ class Html
      * <div {{ attributes({ id: 'foo', ariaHidden: 'true' }) }}></div>
      * ```
      *
-     * @param  array  $attributes The attributes to render.
-     * @return string             The rendered attributes.
+     * @param  Environment $env        The attributes to render.
+     * @param  array       $attributes The attributes to render.
+     * @param  array       $options    The attributes to render.
+     * @return string                  The rendered attributes.
      */
-    public static function renderAttributes(Environment $env, array $attributes):string
+    public static function renderAttributes(Environment $env, array $attributes, array $options = array()):string
     {
+        $requiredAttributes = $options['required'] ?? array();
+        $defaultAttributes  = $options['default'] ?? array();
+
+        // Merge `class` attributes before the others
+        $requiredAttributes['class'] = array_filter([
+            $defaultAttributes['class'] ?? '',
+            $attributes['class'] ?? '',
+            $requiredAttributes['class'] ?? '',
+        ]);
+
+        // Remove the `class` attribute if empty
+        if (empty($requiredAttributes['class'])) {
+            unset($requiredAttributes['class']);
+        }
+
+        $finalAttributes    = array_merge($defaultAttributes, $attributes, $requiredAttributes);
         $renderedAttributes = [''];
 
-        foreach ($attributes as $key => $value) {
+        foreach ($finalAttributes as $key => $value) {
             // Convert keys to kebab-case
             $key = (new Convert($key))->toKebab();
 

@@ -74,7 +74,7 @@ A function to manage style attributes more easily.
 <div style="opacity: 0;"></div>
 ```
 
-#### `{{ html_attributes(<attrs>) }}`
+#### `{{ html_attributes(<attrs>[, options]) }}`
 
 A function to render HTML attributes more easily with the following features:
 
@@ -85,6 +85,7 @@ A function to render HTML attributes more easily with the following features:
 
 **Params**
 - `attrs` (`Object`): The attributes to render
+- `options` (`{ default?: Object, required?: Object }`): The default and required attributes to merge with `attrs`
 
 **Examples**
 ```twig
@@ -92,6 +93,14 @@ A function to render HTML attributes more easily with the following features:
 
 {# HTML #}
 <div id="one" data-options="{\"label\":\"close\"}" required></div>
+```
+
+```twig
+{% set default_attributes = { class: 'my-block' } %}
+<div {{ html_attributes({ class: 'mb-4' }, { default: default_atrributes }) }}></div>
+
+{# HTML #}
+<div class="my-block mb-4"></div>
 ```
 
 ### Tags
