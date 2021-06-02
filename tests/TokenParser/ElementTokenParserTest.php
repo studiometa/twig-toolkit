@@ -1,5 +1,7 @@
 <?php
 
+use function Spatie\Snapshots\assertMatchesSnapshot;
+
 beforeEach(function () {
     $loader = new \Twig\Loader\ArrayLoader(['index' => 'index']);
     $twig = new \Twig\Environment($loader);
@@ -13,7 +15,7 @@ test('The `{% html_element %}` Twig tag should render without attributes.', func
     {% html_element 'p' %}Hello world!{% end_html_element %}
     EOD;
     $this->loader->setTemplate('index', $tpl);
-    expect($this->twig->render('index'))->toBe('<p>Hello world!</p>');
+    assertMatchesSnapshot($this->twig->render('index'));
 });
 
 test('The `{% html_element %}` Twig tag should render with attributes.', function () {
@@ -24,14 +26,8 @@ test('The `{% html_element %}` Twig tag should render with attributes.', functio
     {% end_html_element %}
     EOD;
 
-    $html = <<<EOD
-    <p class="foo" id="baz">
-        bar
-    </p>
-    EOD;
-
     $this->loader->setTemplate('index', $tpl);
-    expect($this->twig->render('index'))->toBe($html);
+    assertMatchesSnapshot($this->twig->render('index'));
 });
 
 test('The `{% html_element %}` Twig tag should be able to render single elements.', function () {
@@ -40,12 +36,8 @@ test('The `{% html_element %}` Twig tag should be able to render single elements
     {% html_element tag with { class: "foo", id: "baz" } %}{% end_html_element %}
     EOD;
 
-    $html = <<<EOD
-    <br class="foo" id="baz" />
-    EOD;
-
     $this->loader->setTemplate('index', $tpl);
-    expect($this->twig->render('index'))->toBe($html);
+    assertMatchesSnapshot($this->twig->render('index'));
 });
 
 test('The `{% html_element %}` Twig tag should be able to render dynamic elements.', function () {
@@ -56,14 +48,8 @@ test('The `{% html_element %}` Twig tag should be able to render dynamic element
     {% end_html_element %}
     EOD;
 
-    $html = <<<EOD
-    <p>
-        Hello world
-    </p>
-    EOD;
-
     $this->loader->setTemplate('index', $tpl);
-    expect($this->twig->render('index'))->toBe($html);
+    assertMatchesSnapshot($this->twig->render('index'));
 });
 
 test('The `{% html_element %}` Twig tag should be able to render complex attributes.', function () {
@@ -73,12 +59,6 @@ test('The `{% html_element %}` Twig tag should be able to render complex attribu
     {% end_html_element %}
     EOD;
 
-    $html = <<<EOD
-    <div aria-hidden="true" data-options="&#x7B;&quot;log&quot;&#x3A;true&#x7D;">
-        Hello world
-    </div>
-    EOD;
-
     $this->loader->setTemplate('index', $tpl);
-    expect($this->twig->render('index'))->toBe($html);
+    assertMatchesSnapshot($this->twig->render('index'));
 });
