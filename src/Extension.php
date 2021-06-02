@@ -60,11 +60,19 @@ class Extension extends AbstractExtension
             /** @deprecated 1.0.1 Use the `html_classes` function instead. */
             new TwigFunction('class', [Html::class, 'renderClass']),
             /** @deprecated 1.0.1 Use the `html_attributrs` function instead. */
-            new TwigFunction('attributes', [Html::class, 'renderAttributes'], ['needs_environment' => true, 'is_safe' => ['html']]),
+            new TwigFunction(
+                'attributes',
+                [Html::class, 'renderAttributes'],
+                ['needs_environment' => true, 'is_safe' => ['html']]
+            ),
 
             new TwigFunction('html_classes', [Html::class, 'renderClass']),
             new TwigFunction('html_styles', [Html::class, 'renderStyleAttribute']),
-            new TwigFunction('html_attributes', [Html::class, 'renderAttributes'], ['needs_environment' => true, 'is_safe' => ['html']]),
+            new TwigFunction(
+                'html_attributes',
+                [Html::class, 'renderAttributes'],
+                ['needs_environment' => true, 'is_safe' => ['html']]
+            ),
         ];
     }
 }

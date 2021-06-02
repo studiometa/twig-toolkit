@@ -32,12 +32,14 @@ class ElementNode extends Node implements NodeCaptureInterface
             }
 
             $compiler->subcompile($this->getNode('body'));
-            $compiler->write('$body = ("" === $tmp = ob_get_clean()) ? null : new Markup($tmp, $this->env->getCharset());');
+            $compiler->write(
+                '$body = ("" === $tmp = ob_get_clean()) ? null : new Markup($tmp, $this->env->getCharset());'
+            );
             $compiler->raw("\n");
         } else {
             $compiler->write('$body = null;')->raw("\n");
         }
-        
+
         // Element
         $compiler
             ->addDebugInfo($this)

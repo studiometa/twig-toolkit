@@ -190,8 +190,12 @@ class Html
      * @param  string|null $content    The content of the tag.
      * @return string                  The rendered markup.
      */
-    public static function renderTag(Environment $env, string $name, array $attributes = [], string $content = null):string
-    {
+    public static function renderTag(
+        Environment $env,
+        string $name,
+        array $attributes = [],
+        string $content = null
+    ):string {
         $attributes = static::renderAttributes($env, $attributes);
         $name = twig_escape_filter($env, $name, 'html_attr', $env->getCharset());
 
