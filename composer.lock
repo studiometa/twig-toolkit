@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ccc27b11ec00a862623884fa2db894fe",
+    "content-hash": "bacd1e1446634be9ab71799efe6e70eb",
     "packages": [
         {
             "name": "jawira/case-converter",
@@ -3749,16 +3749,16 @@
         },
         {
             "name": "symfony/property-info",
-            "version": "v5.3.0",
+            "version": "v5.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/property-info.git",
-                "reference": "64d7dfb197749b0e00c6d8dcd5629fd6fac352f7"
+                "reference": "6f8bff281f215dbf41929c7ec6f8309cdc0912cf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/property-info/zipball/64d7dfb197749b0e00c6d8dcd5629fd6fac352f7",
-                "reference": "64d7dfb197749b0e00c6d8dcd5629fd6fac352f7",
+                "url": "https://api.github.com/repos/symfony/property-info/zipball/6f8bff281f215dbf41929c7ec6f8309cdc0912cf",
+                "reference": "6f8bff281f215dbf41929c7ec6f8309cdc0912cf",
                 "shasum": ""
             },
             "require": {
@@ -3819,7 +3819,7 @@
                 "validator"
             ],
             "support": {
-                "source": "https://github.com/symfony/property-info/tree/v5.3.0"
+                "source": "https://github.com/symfony/property-info/tree/v5.3.1"
             },
             "funding": [
                 {
@@ -3835,20 +3835,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-05-26T17:43:10+00:00"
+            "time": "2021-05-31T12:40:48+00:00"
         },
         {
             "name": "symfony/serializer",
-            "version": "v5.3.0",
+            "version": "v5.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/serializer.git",
-                "reference": "c8b06eeea68ea0fd0878cde880e65d5d6fa01464"
+                "reference": "ebb3dc397af77a08d734eea7305e0b2ec8c5e875"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/serializer/zipball/c8b06eeea68ea0fd0878cde880e65d5d6fa01464",
-                "reference": "c8b06eeea68ea0fd0878cde880e65d5d6fa01464",
+                "url": "https://api.github.com/repos/symfony/serializer/zipball/ebb3dc397af77a08d734eea7305e0b2ec8c5e875",
+                "reference": "ebb3dc397af77a08d734eea7305e0b2ec8c5e875",
                 "shasum": ""
             },
             "require": {
@@ -3863,7 +3863,7 @@
                 "phpdocumentor/type-resolver": "<1.4.0",
                 "symfony/dependency-injection": "<4.4",
                 "symfony/property-access": "<4.4",
-                "symfony/property-info": "<4.4",
+                "symfony/property-info": "<5.3",
                 "symfony/yaml": "<4.4"
             },
             "require-dev": {
@@ -3921,7 +3921,7 @@
             "description": "Handles serializing and deserializing data structures, including object graphs, into array structures or other formats like XML and JSON.",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/serializer/tree/v5.3.0"
+                "source": "https://github.com/symfony/serializer/tree/v5.3.1"
             },
             "funding": [
                 {
@@ -3937,7 +3937,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-05-26T17:43:10+00:00"
+            "time": "2021-06-02T09:36:17+00:00"
         },
         {
             "name": "symfony/service-contracts",
@@ -4291,7 +4291,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=7.0"
+        "php": "^7.3|^8.0"
     },
     "platform-dev": [],
     "plugin-api-version": "2.0.0"

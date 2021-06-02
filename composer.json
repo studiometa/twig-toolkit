@@ -4,7 +4,7 @@
   "description": "A set of useful extension and components for Twig.",
   "license": "MIT",
   "require": {
-    "php": ">=7.0",
+    "php": "^7.3|^8.0",
     "twig/twig": "^2.10|^3",
     "jawira/case-converter": "^3.4"
   },
