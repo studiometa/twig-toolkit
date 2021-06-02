@@ -46,23 +46,34 @@ jobs:
     name: Unit test
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
-        php: [7.4, 8.0]
+        php-versions: ['7.4', '8.0']
     steps:
       - uses: actions/checkout@v2
 
-      - name: Cache Composer dependencies
+      - name: Setup PHP, with composer and xdebug
+        uses: shivammathur/setup-php@v2 #https://github.com/shivammathur/setup-php
+        with:
+          php-version: ${{ matrix.php-versions }}
+          coverage: xdebug
+
+      - name: Get composer cache directory
+        id: composer-cache
+        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+
+      - name: Cache composer dependencies
         uses: actions/cache@v2
         with:
-          path: /tmp/composer-cache
-          key: ${{ runner.os }}-${{ hashFiles('**/composer.lock') }}-${{ matrix.php }}
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: ${{ runner.os }}-composer-
 
-      - uses: php-actions/composer@v5
-        with:
-          php_version: ${{ matrix.php }}
+      - name: Install Composer dependencies
+        run: composer install --no-progress --prefer-dist --optimize-autoloader
 
       - name: Pest
-        run: ./vendor/bin/pest --coverage --coverage-clover='coverage.xml'
+        run: php -v && XDEBUG_MODE=coverage ./vendor/bin/pest --coverage --coverage-clover='coverage.xml'
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v1
