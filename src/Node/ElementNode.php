@@ -50,7 +50,7 @@ class ElementNode extends Node implements NodeCaptureInterface
         if ($this->hasNode('attrs')) {
             $compiler->subcompile($this->getNode('attrs'));
         } else {
-            $compiler->raw(' []');
+            $compiler->raw('[]');
         }
 
         $compiler->raw(', $body);')->raw("\n");

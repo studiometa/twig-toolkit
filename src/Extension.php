@@ -16,6 +16,7 @@ use Twig\Extension\AbstractExtension;
 use Twig\Loader\FilesystemLoader;
 use Twig\TokenParser\TokenParserInterface;
 use Twig\TwigFunction;
+use Twig\TwigFilter;
 
 /**
  * Twig extension class.
@@ -73,6 +74,18 @@ class Extension extends AbstractExtension
                 [Html::class, 'renderAttributes'],
                 ['needs_environment' => true, 'is_safe' => ['html']]
             ),
+        ];
+    }
+
+    /**
+     * Return a list of filters.
+     *
+     * @return TwigFilter[]
+     */
+    public function getFilters()
+    {
+        return [
+            new TwigFilter('merge_html_attributes', [Html::class, 'mergeAttributes']),
         ];
     }
 }

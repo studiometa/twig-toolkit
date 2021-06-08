@@ -1,0 +1,1 @@
+ id="baz" class="bg-red&#x20;block&#x20;my-component"

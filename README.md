@@ -74,7 +74,7 @@ A function to manage style attributes more easily.
 <div style="opacity: 0;"></div>
 ```
 
-#### `{{ html_attributes(<attrs>[, options]) }}`
+#### `{{ html_attributes(<attrs>) }}`
 
 A function to render HTML attributes more easily with the following features:
 
@@ -85,7 +85,6 @@ A function to render HTML attributes more easily with the following features:
 
 **Params**
 - `attrs` (`Object`): The attributes to render
-- `options` (`{ default?: Object, required?: Object }`): The default and required attributes to merge with `attrs`
 
 **Examples**
 ```twig
@@ -95,12 +94,31 @@ A function to render HTML attributes more easily with the following features:
 <div id="one" data-options="{\"label\":\"close\"}" required></div>
 ```
 
-```twig
-{% set default_attributes = { class: 'my-block' } %}
-<div {{ html_attributes({ class: 'mb-4' }, { default: default_atrributes }) }}></div>
+### Filters
 
-{# HTML #}
-<div class="my-block mb-4"></div>
+### `{{ attr|merge_html_attributes(default[, required]) }}`
+
+Merge HTML attributes smartly.
+
+**Params**
+- `attr` (`HTMLAttributes`)
+- `default` (`HTMLAttributes`)
+- `required` (`HTMLAttributes`)
+
+**Examples**
+```twig
+{% set attributes = { id: 'foo' } %}
+{% set default_attributes = { class: 'bar' } %}
+{% set required_attributes = { data_component: 'Component' } %}
+
+{# With the `html_attributes` function #}
+<div {{ html_attributes(attr|merge_html_attributes(default_attributes, required_attributes)) }}></div>
+
+{# With the `html_element` tag #}
+{% html_element 'div' with attr|merge_html_attributes(default_attributes, required_attributes) %}
+
+{# With a named argument to avoid passing an empty value #}
+{{ attr|merge_html_attributes(required=required_attributes) }}
 ```
 
 ### Tags

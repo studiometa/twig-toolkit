@@ -115,6 +115,38 @@ class Html
     }
 
     /**
+     * Merge the given array representing HTML attributes.
+     *
+     * @param  array  $attributes
+     *   The user provided attributes.
+     * @param  array  $default
+     *   The default attributes that should be used when their equivalent is not defined.
+     * @param  array  $required
+     *   The required attributes that should always be present and can not be overriden.
+     *
+     * @return array
+     */
+    public static function mergeAttributes(
+        array $attributes,
+        array $default = [],
+        array $required = []
+    ):array {
+        // Merge `class` attributes before the others
+        $required['class'] = array_filter([
+            $default['class'] ?? '',
+            $attributes['class'] ?? '',
+            $required['class'] ?? '',
+        ]);
+
+        // Remove the `class` attribute if empty
+        if (empty($required['class'])) {
+            unset($required['class']);
+        }
+
+        return array_merge($default, $attributes, $required);
+    }
+
+    /**
      * Render an array of attributes.
      *
      * @example
@@ -124,30 +156,13 @@ class Html
      *
      * @param  Environment $env        The attributes to render.
      * @param  array       $attributes The attributes to render.
-     * @param  array       $options    The attributes to render.
      * @return string                  The rendered attributes.
      */
-    public static function renderAttributes(Environment $env, array $attributes, array $options = array()):string
+    public static function renderAttributes(Environment $env, array $attributes):string
     {
-        $requiredAttributes = $options['required'] ?? array();
-        $defaultAttributes  = $options['default'] ?? array();
-
-        // Merge `class` attributes before the others
-        $requiredAttributes['class'] = array_filter([
-            $defaultAttributes['class'] ?? '',
-            $attributes['class'] ?? '',
-            $requiredAttributes['class'] ?? '',
-        ]);
-
-        // Remove the `class` attribute if empty
-        if (empty($requiredAttributes['class'])) {
-            unset($requiredAttributes['class']);
-        }
-
-        $finalAttributes    = array_merge($defaultAttributes, $attributes, $requiredAttributes);
         $renderedAttributes = [''];
 
-        foreach ($finalAttributes as $key => $value) {
+        foreach ($attributes as $key => $value) {
             // Convert keys to kebab-case
             $key = (new Convert($key))->toKebab();
 
@@ -194,7 +209,7 @@ class Html
         Environment $env,
         string $name,
         array $attributes = [],
-        string $content = null
+        string $content = null,
     ):string {
         $attributes = static::renderAttributes($env, $attributes);
         $name = twig_escape_filter($env, $name, 'html_attr', $env->getCharset());
