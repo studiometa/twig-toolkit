@@ -209,7 +209,7 @@ class Html
         Environment $env,
         string $name,
         array $attributes = [],
-        string $content = null,
+        string $content = null
     ):string {
         $attributes = static::renderAttributes($env, $attributes);
         $name = twig_escape_filter($env, $name, 'html_attr', $env->getCharset());
