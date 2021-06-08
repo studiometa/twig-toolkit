@@ -96,18 +96,19 @@ A function to render HTML attributes more easily with the following features:
 
 ### Filters
 
-### `{{ attr|merge_html_attributes(default[, required]) }}`
+### `{{ attr|merge_html_attributes(default, required) }}`
 
-Merge HTML attributes smartly.
+Merge HTML attributes smartly, useful to define default and required attributes at the component level and allow users to add custom ones.
 
 **Params**
-- `attr` (`HTMLAttributes`)
-- `default` (`HTMLAttributes`)
-- `required` (`HTMLAttributes`)
+- `attr` (`Object`): The user provided attributes
+- `default` (`Object`): The default attributes
+- `required` (`Object`): The required attributes
 
 **Examples**
 ```twig
-{% set attributes = { id: 'foo' } %}
+{# component.twig #}
+{% set attributes = attr|default({}) %}
 {% set default_attributes = { class: 'bar' } %}
 {% set required_attributes = { data_component: 'Component' } %}
 
@@ -119,6 +120,9 @@ Merge HTML attributes smartly.
 
 {# With a named argument to avoid passing an empty value #}
 {{ attr|merge_html_attributes(required=required_attributes) }}
+
+{# page.twig #}
+{% include 'component.twig' with { attr: { class: 'mb-10' } } %}
 ```
 
 ### Tags
