@@ -106,23 +106,48 @@ Merge HTML attributes smartly, useful to define default and required attributes 
 - `required` (`Object`): The required attributes
 
 **Examples**
+
+You can define default and required attributes in a component's template:
+
 ```twig
-{# component.twig #}
+{#
+/**
+ * @file
+ * component
+ *
+ * @param array $attr
+ *   Custom attributes to apply to the root element.
+ */
+#}
+
 {% set attributes = attr|default({}) %}
 {% set default_attributes = { class: 'bar' } %}
 {% set required_attributes = { data_component: 'Component' } %}
 
-{# With the `html_attributes` function #}
-<div {{ html_attributes(attr|merge_html_attributes(default_attributes, required_attributes)) }}></div>
+{# Merge all attributes #}
+{% set final_attributes = attributes|merge_html_attributes(default_attributes, required_attributes)}
 
-{# With the `html_element` tag #}
-{% html_element 'div' with attr|merge_html_attributes(default_attributes, required_attributes) %}
+<div {{ html_attributes(final_attributes)) }}></div>
+{# or #}
+{% html_element 'div' with final_attributes %}
+```
 
-{# With a named argument to avoid passing an empty value #}
-{{ attr|merge_html_attributes(required=required_attributes) }}
+And then include your component with custom attributes:
 
-{# page.twig #}
-{% include 'component.twig' with { attr: { class: 'mb-10' } } %}
+```twig
+{% include 'component.twig' with {
+  attr: {
+    class: 'mb-10',
+    aria_hidden: 'true'
+  }
+} %}
+```
+
+You can take advantage of [named arguments](http://twig.symfony.com/doc/3.x/templates.html#named-arguments) to avoid passing a value for the default attributes argument:
+
+```twig
+{% set required_attributes = { id: 'block' } %}
+{{ attr|merge_html_attributes(required=required_attribute)}}
 ```
 
 ### Tags
