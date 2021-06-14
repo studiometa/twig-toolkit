@@ -133,8 +133,7 @@ class Html
     ):array {
         // Merge `class` attributes before the others
         $required['class'] = array_filter([
-            $default['class'] ?? '',
-            $attributes['class'] ?? '',
+            $attributes['class'] ?? $default['class'] ?? '',
             $required['class'] ?? '',
         ]);
 

@@ -93,6 +93,29 @@ test('The `{{ attr|merge_html_attributes() }}` Twig filter should merge default 
     EOD;
     test()->loader->setTemplate('index', $tpl);
     assertMatchesSnapshot(test()->twig->render('index'));
+
+    $tpl = <<<EOD
+    {% set attributes = { id: 'foo', class: 'block' } %}
+    {{ html_attributes(
+        attributes|merge_html_attributes({
+            id: 'bar',
+        })
+    ) }}
+    EOD;
+    test()->loader->setTemplate('index', $tpl);
+    assertMatchesSnapshot(test()->twig->render('index'));
+
+     $tpl = <<<EOD
+    {% set attributes = { data_component: 'foo' } %}
+    {{ html_attributes(
+        attributes|merge_html_attributes({
+            id: 'bar',
+            class: 'default'
+        })
+    ) }}
+    EOD;
+    test()->loader->setTemplate('index', $tpl);
+    assertMatchesSnapshot(test()->twig->render('index'));
 });
 
 test('The `{{ attr|merge_html_attributes() }}` Twig filter should merge required attributes', function () {
