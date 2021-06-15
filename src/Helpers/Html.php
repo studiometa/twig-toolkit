@@ -84,6 +84,68 @@ class Html
     }
 
     /**
+     * Render an array of CSS styles into a valid CSS string.
+     *
+     * @example
+     * ```php
+     * Html::renderStyleAttribute(['display' => 'none', 'pointer-events' => 'none']);
+     * // 'display: none; pointer-events: none;'
+     * ```
+     *
+     * @param  array  $styles The styles to render.
+     * @return string         The rendered styles.
+     */
+    public static function renderStyleAttribute(array $styles):string
+    {
+        $renderedStyle = [];
+
+        foreach ($styles as $property => $value) {
+            // Skip boolean values that are not true and empty strings
+            if (is_bool($value) && !$value || $value === '') {
+                continue;
+            }
+
+            // Convert property to kebab-case as it is the only
+            // valid case format for CSS properties.
+            $property = (new Convert($property))->toKebab();
+            $renderedStyle[] = sprintf('%s: %s;', $property, $value);
+        }
+
+        return implode(' ', $renderedStyle);
+    }
+
+    /**
+     * Merge the given array representing HTML attributes.
+     *
+     * @param  array  $attributes
+     *   The user provided attributes.
+     * @param  array  $default
+     *   The default attributes that should be used when their equivalent is not defined.
+     * @param  array  $required
+     *   The required attributes that should always be present and can not be overriden.
+     *
+     * @return array
+     */
+    public static function mergeAttributes(
+        array $attributes,
+        array $default = [],
+        array $required = []
+    ):array {
+        // Merge `class` attributes before the others
+        $required['class'] = array_filter([
+            $attributes['class'] ?? $default['class'] ?? '',
+            $required['class'] ?? '',
+        ]);
+
+        // Remove the `class` attribute if empty
+        if (empty($required['class'])) {
+            unset($required['class']);
+        }
+
+        return array_merge($default, $attributes, $required);
+    }
+
+    /**
      * Render an array of attributes.
      *
      * @example
@@ -91,8 +153,9 @@ class Html
      * <div {{ attributes({ id: 'foo', ariaHidden: 'true' }) }}></div>
      * ```
      *
-     * @param  array  $attributes The attributes to render.
-     * @return string             The rendered attributes.
+     * @param  Environment $env        The attributes to render.
+     * @param  array       $attributes The attributes to render.
+     * @return string                  The rendered attributes.
      */
     public static function renderAttributes(Environment $env, array $attributes):string
     {
@@ -113,6 +176,11 @@ class Html
             // Format class attributes
             if ($key === 'class') {
                 $value = static::renderClass($value);
+            }
+
+            // Format style attributes from array to string
+            if ($key === 'style' && is_array($value)) {
+                $value = static::renderStyleAttribute($value);
             }
 
             if (is_array($value)) {
@@ -136,8 +204,12 @@ class Html
      * @param  string|null $content    The content of the tag.
      * @return string                  The rendered markup.
      */
-    public static function renderTag(Environment $env, string $name, array $attributes = [], string $content = null):string
-    {
+    public static function renderTag(
+        Environment $env,
+        string $name,
+        array $attributes = [],
+        string $content = null
+    ):string {
         $attributes = static::renderAttributes($env, $attributes);
         $name = twig_escape_filter($env, $name, 'html_attr', $env->getCharset());
 
