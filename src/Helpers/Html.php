@@ -115,6 +115,37 @@ class Html
     }
 
     /**
+     * Merge the given array representing HTML attributes.
+     *
+     * @param  array  $attributes
+     *   The user provided attributes.
+     * @param  array  $default
+     *   The default attributes that should be used when their equivalent is not defined.
+     * @param  array  $required
+     *   The required attributes that should always be present and can not be overriden.
+     *
+     * @return array
+     */
+    public static function mergeAttributes(
+        array $attributes,
+        array $default = [],
+        array $required = []
+    ):array {
+        // Merge `class` attributes before the others
+        $required['class'] = array_filter([
+            $attributes['class'] ?? $default['class'] ?? '',
+            $required['class'] ?? '',
+        ]);
+
+        // Remove the `class` attribute if empty
+        if (empty($required['class'])) {
+            unset($required['class']);
+        }
+
+        return array_merge($default, $attributes, $required);
+    }
+
+    /**
      * Render an array of attributes.
      *
      * @example
@@ -122,8 +153,9 @@ class Html
      * <div {{ attributes({ id: 'foo', ariaHidden: 'true' }) }}></div>
      * ```
      *
-     * @param  array  $attributes The attributes to render.
-     * @return string             The rendered attributes.
+     * @param  Environment $env        The attributes to render.
+     * @param  array       $attributes The attributes to render.
+     * @return string                  The rendered attributes.
      */
     public static function renderAttributes(Environment $env, array $attributes):string
     {
@@ -172,8 +204,12 @@ class Html
      * @param  string|null $content    The content of the tag.
      * @return string                  The rendered markup.
      */
-    public static function renderTag(Environment $env, string $name, array $attributes = [], string $content = null):string
-    {
+    public static function renderTag(
+        Environment $env,
+        string $name,
+        array $attributes = [],
+        string $content = null
+    ):string {
         $attributes = static::renderAttributes($env, $attributes);
         $name = twig_escape_filter($env, $name, 'html_attr', $env->getCharset());
 

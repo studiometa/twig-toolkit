@@ -1,0 +1,1 @@
+ id="bar" class="block&#x20;foo&#x20;my-component"

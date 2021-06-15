@@ -1,0 +1,1 @@
+ id="bar" class="default" data-component="foo"

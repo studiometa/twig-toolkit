@@ -1,35 +1,37 @@
 <?php
 
+use function Spatie\Snapshots\assertMatchesSnapshot;
+
 beforeEach(function () {
     $loader = new \Twig\Loader\ArrayLoader(['index' => 'index']);
     $twig = new \Twig\Environment($loader);
     $twig->addExtension(new \Studiometa\TwigToolkit\Extension());
-    $this->loader = $loader;
-    $this->twig = $twig;
+    test()->loader = $loader;
+    test()->twig = $twig;
 });
 
 test('The `{{ html_classes() }}` Twig function should accept a string parameter.', function () {
     $tpl = <<<EOD
     {{ html_classes('block m-4') }}
     EOD;
-    $this->loader->setTemplate('index', $tpl);
-    expect($this->twig->render('index'))->toBe('block m-4');
+    test()->loader->setTemplate('index', $tpl);
+    assertMatchesSnapshot(test()->twig->render('index'));
 });
 
 test('The `{{ html_classes() }}` Twig function should accept an array of string parameter.', function () {
     $tpl = <<<EOD
     {{ html_classes(['block', 'm-4']) }}
     EOD;
-    $this->loader->setTemplate('index', $tpl);
-    expect($this->twig->render('index'))->toBe('block m-4');
+    test()->loader->setTemplate('index', $tpl);
+    assertMatchesSnapshot(test()->twig->render('index'));
 });
 
 test('The `{{ html_classes() }}` Twig function should accept an object parameter', function () {
     $tpl = <<<EOD
     {{ html_classes({ block: true, hidden: null, relative: false }) }}
     EOD;
-    $this->loader->setTemplate('index', $tpl);
-    expect($this->twig->render('index'))->toBe('block');
+    test()->loader->setTemplate('index', $tpl);
+    assertMatchesSnapshot(test()->twig->render('index'));
 });
 
 test('The `{{ html_classes() }}` Twig function should work with dynamic test values.', function () {
@@ -37,38 +39,131 @@ test('The `{{ html_classes() }}` Twig function should work with dynamic test val
     {% set is_block = true %}
     {{ html_classes({ block: is_block, relative: not is_block }) }}
     EOD;
-    $this->loader->setTemplate('index', $tpl);
-    expect($this->twig->render('index'))->toBe('block');
+    test()->loader->setTemplate('index', $tpl);
+    assertMatchesSnapshot(test()->twig->render('index'));
 });
 
 test('The `{{ html_classes() }}` Twig function should work with an array of string and object parameter.', function () {
     $tpl = <<<EOD
     {{ html_classes(['block', { foo: true, bar: false, }, 'm-4']) }}
     EOD;
-    $this->loader->setTemplate('index', $tpl);
-    expect($this->twig->render('index'))->toBe('block foo m-4');
+    test()->loader->setTemplate('index', $tpl);
+    assertMatchesSnapshot(test()->twig->render('index'));
 });
 
 test('The `{{ html_styles() }}` Twig function should render inline CSS.', function () {
     $tpl = <<<EOD
     {{ html_styles({ display: 'none', marginRight: '', overflow: 0 != 0, margin_top: '10px' }) }}
     EOD;
-    $this->loader->setTemplate('index', $tpl);
-    expect($this->twig->render('index'))->toBe('display: none; margin-top: 10px;');
+    test()->loader->setTemplate('index', $tpl);
+    assertMatchesSnapshot(test()->twig->render('index'));
 });
 
 test('The `{{ html_attributes() }}` Twig function should render attributes', function () {
     $tpl = <<<EOD
-    {{ html_attributes({ id: 'foo', class: ['block', { foo: true, bar: false }], required: true, aria_hidden: 'true' }) }}
+    {{ html_attributes({
+        id: 'foo',
+        class: ['block', { foo: true, bar: false }],
+        required: true,
+        aria_hidden: 'true',
+        style: { display: 'none' }
+    }) }}
     EOD;
-    $this->loader->setTemplate('index', $tpl);
-    expect($this->twig->render('index'))->toBe(' id="foo" class="block&#x20;foo" required aria-hidden="true"');
+    test()->loader->setTemplate('index', $tpl);
+    assertMatchesSnapshot(test()->twig->render('index'));
 });
 
 test('The `{{ html_attributes() }}` Twig function should not render falsy attributes', function () {
     $tpl = <<<EOD
     {{ html_attributes({ checked: true, autofocus: true, selected: false }) }}
     EOD;
-    $this->loader->setTemplate('index', $tpl);
-    expect($this->twig->render('index'))->toBe(' checked autofocus');
+    test()->loader->setTemplate('index', $tpl);
+    assertMatchesSnapshot(test()->twig->render('index'));
+});
+
+test('The `{{ attr|merge_html_attributes() }}` Twig filter should merge default attributes', function () {
+    $tpl = <<<EOD
+    {% set attributes = { id: 'foo', class: 'block' } %}
+    {{ html_attributes(
+        attributes|merge_html_attributes({
+            id: 'bar',
+            class: 'bg-red'
+        })
+    ) }}
+    EOD;
+    test()->loader->setTemplate('index', $tpl);
+    assertMatchesSnapshot(test()->twig->render('index'));
+
+    $tpl = <<<EOD
+    {% set attributes = { id: 'foo', class: 'block' } %}
+    {{ html_attributes(
+        attributes|merge_html_attributes({
+            id: 'bar',
+        })
+    ) }}
+    EOD;
+    test()->loader->setTemplate('index', $tpl);
+    assertMatchesSnapshot(test()->twig->render('index'));
+
+     $tpl = <<<EOD
+    {% set attributes = { data_component: 'foo' } %}
+    {{ html_attributes(
+        attributes|merge_html_attributes({
+            id: 'bar',
+            class: 'default'
+        })
+    ) }}
+    EOD;
+    test()->loader->setTemplate('index', $tpl);
+    assertMatchesSnapshot(test()->twig->render('index'));
+});
+
+test('The `{{ attr|merge_html_attributes() }}` Twig filter should merge required attributes', function () {
+    $tpl = <<<EOD
+    {% set attributes = { id: 'foo', class: ['block', { foo: true, bar: false }] } %}
+    {{ html_attributes(
+        attributes|merge_html_attributes({}, {
+            id: 'bar',
+            class: 'my-component'
+        })
+    ) }}
+    EOD;
+    test()->loader->setTemplate('index', $tpl);
+    assertMatchesSnapshot(test()->twig->render('index'));
+});
+
+test('The `{{ attr|merge_html_attributes() }}` Twig filter should merge required attributes with named argument', function () {
+    $tpl = <<<EOD
+    {% set attributes = { id: 'foo', class: ['block', { foo: true, bar: false }] } %}
+    {{ html_attributes(
+        attributes|merge_html_attributes(required={
+            id: 'bar',
+            class: 'my-component'
+        })
+    ) }}
+    EOD;
+    test()->loader->setTemplate('index', $tpl);
+    assertMatchesSnapshot(test()->twig->render('index'));
+});
+
+test('The `{{ attr|merge_html_attributes() }}` Twig filter should merge default and required attributes', function () {
+    $tpl = <<<EOD
+    {% set attributes = { id: 'foo', class: 'block' } %}
+    {% set default_attributes = { id: 'bar', class: 'bg-red' } %}
+    {% set required_attributes = { id: 'baz', class: 'my-component' } %}
+    {{ html_attributes(attributes|merge_html_attributes(default_attributes, required_attributes)) }}
+    EOD;
+    test()->loader->setTemplate('index', $tpl);
+    assertMatchesSnapshot(test()->twig->render('index'));
+});
+
+test('The `{{ attr|merge_html_attributes() }}` Twig filter should merge default and required attributes with named arguments', function () {
+    $tpl = <<<EOD
+    {% set attributes = { id: 'foo', class: 'block' } %}
+    {% set default_attributes = { id: 'bar', class: 'bg-red' } %}
+    {% set required_attributes = { id: 'baz', class: 'my-component' } %}
+    {{ html_attributes(attributes|merge_html_attributes(required=required_attributes, default=default_attributes)) }}
+    EOD;
+    test()->loader->setTemplate('index', $tpl);
+    assertMatchesSnapshot(test()->twig->render('index'));
 });
