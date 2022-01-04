@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "target": "ES6",
+    "module": "ES2015",
+    "lib": ["ESNext", "DOM"],
+    "moduleResolution": "node",
+    "declaration": true,
+    "downlevelIteration": true,
+    "listEmittedFiles": true
+  },
+  "include": [
+    "src/**/*"
+  ]
+}
