@@ -14,8 +14,6 @@ import { EndHtmlElement } from './Tags/EndHtmlElement';
  * @param {import('twig').Twig} instance
  */
 export const extension: Parameters<typeof extend>[0] = (instance) => {
-  const { escape } = instance.exports.filters;
-
   instance.exports.extendFunction('html_styles', (value) =>
     renderStyleAttribute(instance, value)
   );

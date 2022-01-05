@@ -37,12 +37,14 @@ export class HtmlElement extends AbstractTag implements ExtendTagOptions {
     delete token.match;
 
     token.stack = this.instance.expression.compile.call(this, {
+      // @ts-ignore
       type: this.instance.expression.type.expression,
       value: expression,
     }).stack;
 
     if (withContext !== undefined) {
       token.withStack = this.instance.expression.compile.call(this, {
+      // @ts-ignore
         type: this.instance.expression.type.expression,
         value: withContext.trim(),
       }).stack;
@@ -63,7 +65,10 @@ export class HtmlElement extends AbstractTag implements ExtendTagOptions {
     const attributes = token.withStack
       ? this.instance.expression.parse.call(this, token.withStack, context)
       : undefined;
+
+    // @ts-ignore
     const content = this.parse(token.output, context, chain);
+    // @ts-ignore
     const output = renderTag(this.instance, tag, attributes, content);
 
     return {

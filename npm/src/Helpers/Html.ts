@@ -6,10 +6,14 @@ export type Classes = string | Record<string, boolean> | Classes[];
 export type Styles = Record<string, string | number>;
 export type Attributes = Record<string, Styles | Classes | unknown>;
 
-function stringifyWithoutKey(obj: any) {
-  return JSON.stringify(obj, (key, value) =>
-    key === '_keys' ? undefined : value
-  );
+/**
+ * Stringify objects without any `_keys` property added by twigjs.
+ *
+ * @param   {unknown} obj
+ * @returns {string}
+ */
+function stringifyWithoutKey(obj: unknown): string {
+  return JSON.stringify(obj, (key, value) => (key !== '_keys' ? value : undefined));
 }
 
 /**
@@ -50,14 +54,13 @@ export function renderClass(Twig: TwigInterface, classes: Classes): string {
     return classes.map((c) => renderClass(Twig, c)).join(' ');
   }
 
-  const formattedClasses = Object.entries(classes)
-    .reduce((acc, [key, value]) => {
-      if (value && key !== '_keys') {
-        acc.push(key);
-      }
+  const formattedClasses = Object.entries(classes).reduce((acc, [key, value]) => {
+    if (value && key !== '_keys') {
+      acc.push(key);
+    }
 
-      return acc;
-    }, []);
+    return acc;
+  }, []);
 
   return Twig.exports.filters.escape(formattedClasses.join(' '), ['html_attr']);
 }
@@ -69,10 +72,7 @@ export function renderClass(Twig: TwigInterface, classes: Classes): string {
  * @param   {Styles} styles
  * @returns {string}
  */
-export function renderStyleAttribute(
-  Twig: TwigInterface,
-  styles: Styles
-): string {
+export function renderStyleAttribute(Twig: TwigInterface, styles: Styles): string {
   if (!styles) {
     return '';
   }
@@ -80,11 +80,7 @@ export function renderStyleAttribute(
   const renderedStyles = [];
 
   for (const [key, value] of Object.entries(styles)) {
-    if (
-      key === '_keys' ||
-      (typeof value === 'boolean' && !value) ||
-      value === ''
-    ) {
+    if (key === '_keys' || (typeof value === 'boolean' && !value) || value === '') {
       continue;
     }
     renderedStyles.push(`${paramCase(key)}: ${value};`);
@@ -99,10 +95,7 @@ export function renderStyleAttribute(
  * @param   {Attributes} attributes
  * @returns {string}
  */
-export function renderAttributes(
-  Twig: TwigInterface,
-  attributes: Attributes
-): string {
+export function renderAttributes(Twig: TwigInterface, attributes: Attributes): string {
   if (!attributes) {
     return '';
   }
