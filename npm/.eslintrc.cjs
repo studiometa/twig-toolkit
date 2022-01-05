@@ -2,6 +2,9 @@ module.exports = {
   extends: '@studiometa/eslint-config',
   rules: {
     'object-curly-newline': 'off',
+    'implicit-arrow-linebreak': 'off',
+    'function-paren-newline': 'off',
+    'operator-linebreak': 'off',
   },
   settings: {
     'import/resolver': {

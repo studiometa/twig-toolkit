@@ -1,21 +1,33 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
-import type { Twig } from 'twig';
-import { renderStyleAttribute, renderAttributes, renderClass } from './Helpers/Html.js';
-import { EndHtmlElement, HtmlElement } from './Tags/HtmlElement.js';
+import type { extend } from 'twig';
+import {
+  renderStyleAttribute,
+  renderAttributes,
+  renderClass,
+} from './Helpers/Html.js';
+import { HtmlElement } from './Tags/HtmlElement.js';
+import { EndHtmlElement } from './Tags/EndHtmlElement';
 
 /**
  * Extend Twig.
  *
- * @param   {Twig} instance
- * @returns {Twig}
+ * @param {import('twig').Twig} instance
  */
-export function extension<T extends Twig>(instance: T): T {
-  instance.exports.extendFunction('html_styles', renderStyleAttribute);
-  instance.exports.extendFunction('html_attributes', renderAttributes);
-  instance.exports.extendFunction('html_classes', renderClass);
+export const extension: Parameters<typeof extend>[0] = (instance) => {
+  const { escape } = instance.exports.filters;
+
+  instance.exports.extendFunction('html_styles', (value) =>
+    renderStyleAttribute(instance, value)
+  );
+
+  instance.exports.extendFunction('html_attributes', (value) =>
+    renderAttributes(instance, value)
+  );
+
+  instance.exports.extendFunction('html_classes', (value) =>
+    renderClass(instance, value)
+  );
 
   instance.exports.extendTag(new EndHtmlElement(instance));
   instance.exports.extendTag(new HtmlElement(instance));
-
-  return instance;
-}
+};

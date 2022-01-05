@@ -1,7 +1,16 @@
 /* eslint-disable no-restricted-syntax, no-continue, no-await-in-loop */
 import { paramCase } from 'param-case';
+import type { Twig as TwigInterface } from 'twig';
 
 export type Classes = string | Record<string, boolean> | Classes[];
+export type Styles = Record<string, string | number>;
+export type Attributes = Record<string, Styles | Classes | unknown>;
+
+function stringifyWithoutKey(obj: any) {
+  return JSON.stringify(obj, (key, value) =>
+    key === '_keys' ? undefined : value
+  );
+}
 
 /**
  * Convert a map to an object.
@@ -23,41 +32,47 @@ function mapToObject(map) {
 
 /**
  * Render classes.
+ *
+ * @param   {TwigInterface} Twig
  * @param   {Classes} classes
  * @returns {string}
  */
-export function renderClass(classes:Classes):string {
+export function renderClass(Twig: TwigInterface, classes: Classes): string {
   if (!classes) {
     return '';
   }
 
   if (typeof classes === 'string') {
-    return classes;
+    return Twig.exports.filters.escape(classes, ['html_attr']);
   }
 
   if (Array.isArray(classes)) {
-    return classes.map((c) => renderClass(c)).join(' ');
+    return classes.map((c) => renderClass(Twig, c)).join(' ');
   }
 
-  return Object.entries(classes)
+  const formattedClasses = Object.entries(classes)
     .reduce((acc, [key, value]) => {
       if (value && key !== '_keys') {
         acc.push(key);
       }
 
       return acc;
-    }, [])
-    .join(' ');
-}
+    }, []);
 
-export type Styles = Record<string, string|number>;
+  return Twig.exports.filters.escape(formattedClasses.join(' '), ['html_attr']);
+}
 
 /**
  * Render a style attribute.
+ *
+ * @param   {TwigInterface} Twig
  * @param   {Styles} styles
  * @returns {string}
  */
-export function renderStyleAttribute(styles:Styles):string {
+export function renderStyleAttribute(
+  Twig: TwigInterface,
+  styles: Styles
+): string {
   if (!styles) {
     return '';
   }
@@ -65,23 +80,29 @@ export function renderStyleAttribute(styles:Styles):string {
   const renderedStyles = [];
 
   for (const [key, value] of Object.entries(styles)) {
-    if (key === '_keys' || (typeof value === 'boolean' && !value) || value === '') {
+    if (
+      key === '_keys' ||
+      (typeof value === 'boolean' && !value) ||
+      value === ''
+    ) {
       continue;
     }
     renderedStyles.push(`${paramCase(key)}: ${value};`);
   }
-  return renderedStyles.join(' ');
+  return Twig.exports.filters.escape(renderedStyles.join(' '), ['html_attr']);
 }
-
-export type Attributes = Record<string, Styles|Classes|unknown>;
 
 /**
  * Render attributes.
  *
+ * @param   {TwigInterface} Twig
  * @param   {Attributes} attributes
  * @returns {string}
  */
-export function renderAttributes(attributes:Attributes):string {
+export function renderAttributes(
+  Twig: TwigInterface,
+  attributes: Attributes
+): string {
   if (!attributes) {
     return '';
   }
@@ -101,17 +122,19 @@ export function renderAttributes(attributes:Attributes):string {
       continue;
     }
     if (key === 'class') {
-      value = renderClass(value as Classes);
+      value = renderClass(Twig, value as Classes);
     }
     if (key === 'style' && typeof value !== 'string') {
-      value = renderStyleAttribute(value as Styles);
+      value = renderStyleAttribute(Twig, value as Styles);
     }
     if (typeof value !== 'string') {
       if (value instanceof Map) {
-        value = JSON.stringify(mapToObject(value));
+        value = stringifyWithoutKey(mapToObject(value));
       } else {
-        value = JSON.stringify(value);
+        value = stringifyWithoutKey(value);
       }
+
+      value = Twig.exports.filters.escape(value, ['html_attr']);
     }
 
     renderedAttributes.push(`${key}="${value}"`);
@@ -142,13 +165,19 @@ const SELF_CLOSING_TAGS = new Set([
 /**
  * Render a tag.
  *
+ * @param   {TwigInterface} Twig
  * @param   {string} name
  * @param   {Attributes} attributes
  * @param   {string} content
  * @returns {string}
  */
-export function renderTag(name:string, attributes:Attributes, content = ''):string {
-  const formattedAttributes = renderAttributes(attributes);
+export function renderTag(
+  Twig: TwigInterface,
+  name: string,
+  attributes: Attributes,
+  content = ''
+): string {
+  const formattedAttributes = renderAttributes(Twig, attributes);
   if (SELF_CLOSING_TAGS.has(name)) {
     return `<${name}${formattedAttributes} />`;
   }
