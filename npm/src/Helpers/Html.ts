@@ -176,3 +176,47 @@ export function renderTag(
   }
   return `<${name}${formattedAttributes}>\n${content}\n</${name}>`;
 }
+
+/**
+ * Test if a value is empty.
+ *
+ * @param   {unknown} value The value to test.
+ * @returns {boolean}       Is it empty?
+ */
+function isEmpty(value: unknown): boolean {
+  const type = typeof value;
+  return (
+    type === 'undefined' ||
+    value === null ||
+    (type === 'string' && value === '') ||
+    (Array.isArray(value) && value.length === 0) ||
+    (type === 'object' && Object.keys(value).length === 0)
+  );
+}
+
+/**
+ * Merge the given array representing HTML attributes.
+ *
+ * @param {Attributes} attributes The user provided attributes.
+ * @param {Attributes} defaultAttributes The default attributes that should be used when their equivalent is not defined.
+ * @param {Attributes} requiredAttributes The required attributes that should always be present and can not be overriden.
+ * @returns {Attributes}
+ */
+export function mergeAttributes(
+  attributes: Attributes,
+  defaultAttributes: Attributes = {},
+  requiredAttributes: Attributes = {}
+): Attributes {
+  // Merge `class` attributes before the others
+  requiredAttributes.class = [
+    attributes.class ?? defaultAttributes.class ?? '',
+    requiredAttributes.class ?? '',
+  ].filter((value) => !isEmpty(value));
+
+  // Remove the `class` attribute if empty
+  if (isEmpty(requiredAttributes.class)) {
+    delete requiredAttributes.class;
+  }
+
+  return Object.assign(defaultAttributes, attributes, requiredAttributes);
+}

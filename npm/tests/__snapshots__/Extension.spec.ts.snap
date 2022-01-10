@@ -1,9 +1,21 @@
 // Vitest Snapshot v1
 
-exports[`The \`{{ html_attributes() }}\` Twig function > should encode as JSON complex attributes 1`] = `" data-options=\\"&#x7B;&quot;log&quot;&#x3A;true&#x7D;\\""`;
+exports[`The \`{{ attr|merge_html_attributes() }}\` Twig filter > should merge default and required attributes 1`] = `"class=\\"block my-component\\" id=\\"baz\\""`;
 
-exports[`The \`{{ html_attributes() }}\` Twig function > should not render falsy attributes 1`] = `" autofocus checked"`;
+exports[`The \`{{ attr|merge_html_attributes() }}\` Twig filter > should merge default attributes 1`] = `"class=\\"block\\" id=\\"foo\\""`;
 
-exports[`The \`{{ html_attributes() }}\` Twig function > should render attributes 1`] = `" aria-hidden=\\"true\\" required class=\\"block foo\\" id=\\"foo\\""`;
+exports[`The \`{{ attr|merge_html_attributes() }}\` Twig filter > should merge default attributes 2`] = `"id=\\"foo\\" class=\\"block\\""`;
+
+exports[`The \`{{ attr|merge_html_attributes() }}\` Twig filter > should merge default attributes 3`] = `"class=\\"default\\" id=\\"bar\\" data-component=\\"foo\\""`;
+
+exports[`The \`{{ attr|merge_html_attributes() }}\` Twig filter > should merge required attributes 1`] = `"class=\\"block foo my-component\\" id=\\"bar\\""`;
+
+exports[`The \`{{ attr|merge_html_attributes() }}\` Twig filter > should merge required attributes with named argument 1`] = `""`;
+
+exports[`The \`{{ html_attributes() }}\` Twig function > should encode as JSON complex attributes 1`] = `"data-options=\\"&#x7B;&quot;log&quot;&#x3A;true&#x7D;\\""`;
+
+exports[`The \`{{ html_attributes() }}\` Twig function > should not render falsy attributes 1`] = `"autofocus checked"`;
+
+exports[`The \`{{ html_attributes() }}\` Twig function > should render attributes 1`] = `"aria-hidden=\\"true\\" required class=\\"block foo\\" id=\\"foo\\""`;
 
 exports[`The \`{{ html_styles() }}\` Twig function > should render inline CSS. 1`] = `"margin-top&#x3A;&#x20;10px&#x3B;&#x20;display&#x3A;&#x20;none&#x3B;"`;

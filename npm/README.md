@@ -13,32 +13,16 @@ npm install @studiometa/twig-toolkit --save-dev
 
 ## Usage
 
-Add the `Extension` to your Twig instance:
+Use `Twig.extend` to register the extension:
 
 ```js
-import { TwingEnvironment, TwingFilesystemLoader } from 'twing';
-import { Extension, ExtensionName } from '@studiometa/twig-toolkit';
+import Twig from 'twig';
+import { extension } from '@studiometa/twig-toolkit';
 
-const loader = new TwingFilesystemLoader();
-const twig = new TwingEnvironment(loader);
-twig.addExtension(new Extension(), ExtensionName);
-```
-
-If you pass a `TwingFilesystemLoader` instance to the extension constructor, a `meta` namespace pointing to the `templates/` folder of this package will be added. You will then be able to include components from this package with the `@meta` alias:
-
-```twig
-{% include '@meta/components/signature' %}
+Twig.extend(extension);
 ```
 
 ## Reference
-
-### Namespace
-
-When provided with a `TwingFilesystemLoader` parameter, the extension will register a `@meta` namespace referring to the `templates` folder of this package. You will be able to import file in this folder directly from you project's templates:
-
-```twig
-{% include '@meta/components/signature.twig' %}
-```
 
 ### Functions
 
@@ -95,6 +79,55 @@ A function to render HTML attributes more easily with the following features:
 
 {# HTML #}
 <div id="one" data-options="{\"label\":\"close\"}" required></div>
+```
+
+### Filters
+
+### `{{ attr|merge_html_attributes(default, required) }}`
+
+Merge HTML attributes smartly, useful to define default and required attributes at the component level and allow users to add custom ones.
+
+**Params**
+- `attr` (`Object`): The user provided attributes
+- `default` (`Object`): The default attributes
+- `required` (`Object`): The required attributes
+
+**Examples**
+
+You can define default and required attributes in a component's template:
+
+```twig
+{#
+/**
+ * @file
+ * component
+ *
+ * @param array $attr
+ *   Custom attributes to apply to the root element.
+ */
+#}
+
+{% set attributes = attr|default({}) %}
+{% set default_attributes = { class: 'bar' } %}
+{% set required_attributes = { data_component: 'Component' } %}
+
+{# Merge all attributes #}
+{% set final_attributes = attributes|merge_html_attributes(default_attributes, required_attributes)}
+
+<div {{ html_attributes(final_attributes)) }}></div>
+{# or #}
+{% html_element 'div' with final_attributes %}
+```
+
+And then include your component with custom attributes:
+
+```twig
+{% include 'component.twig' with {
+  attr: {
+    class: 'mb-10',
+    aria_hidden: 'true'
+  }
+} %}
 ```
 
 ### Tags
