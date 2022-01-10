@@ -47,6 +47,7 @@ export function renderClass(Twig: TwigInterface, classes: Classes): string {
   }
 
   if (typeof classes === 'string') {
+    // @ts-ignore
     return Twig.exports.filters.escape(classes, ['html_attr']);
   }
 
@@ -62,6 +63,7 @@ export function renderClass(Twig: TwigInterface, classes: Classes): string {
     return acc;
   }, []);
 
+  // @ts-ignore
   return Twig.exports.filters.escape(formattedClasses.join(' '), ['html_attr']);
 }
 
@@ -85,6 +87,8 @@ export function renderStyleAttribute(Twig: TwigInterface, styles: Styles): strin
     }
     renderedStyles.push(`${paramCase(key)}: ${value};`);
   }
+
+  // @ts-ignore
   return Twig.exports.filters.escape(renderedStyles.join(' '), ['html_attr']);
 }
 
@@ -127,6 +131,7 @@ export function renderAttributes(Twig: TwigInterface, attributes: Attributes): s
         value = stringifyWithoutKey(value);
       }
 
+      // @ts-ignore
       value = Twig.exports.filters.escape(value, ['html_attr']);
     }
 
