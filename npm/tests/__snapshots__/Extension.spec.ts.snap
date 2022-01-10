@@ -10,8 +10,6 @@ exports[`The \`{{ attr|merge_html_attributes() }}\` Twig filter > should merge d
 
 exports[`The \`{{ attr|merge_html_attributes() }}\` Twig filter > should merge required attributes 1`] = `"class=\\"block foo my-component\\" id=\\"bar\\""`;
 
-exports[`The \`{{ attr|merge_html_attributes() }}\` Twig filter > should merge required attributes with named argument 1`] = `""`;
-
 exports[`The \`{{ html_attributes() }}\` Twig function > should encode as JSON complex attributes 1`] = `"data-options=\\"&#x7B;&quot;log&quot;&#x3A;true&#x7D;\\""`;
 
 exports[`The \`{{ html_attributes() }}\` Twig function > should not render falsy attributes 1`] = `"autofocus checked"`;
