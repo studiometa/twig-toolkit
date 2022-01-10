@@ -1,6 +1,6 @@
 {
   "name": "@studiometa/twig-toolkit",
-  "version": "2.0.0",
+  "version": "2.0.0-alpha.0",
   "description": "A set of useful extension and components for Twig.",
   "publishConfig": {
     "access": "public"
@@ -11,7 +11,8 @@
   "type": "module",
   "files": [
     "dist/",
-    "templates/"
+    "README.md",
+    "LICENSE"
   ],
   "exports": {
     ".": {
@@ -26,7 +27,7 @@
     "test": "vitest",
     "lint": "eslint src/**/*.ts",
     "fix": "npm run lint -- --fix",
-    "prepublishOnly": "npm run test && npm run build"
+    "prepublishOnly": "vitest run && npm run build"
   },
   "repository": {
     "type": "git",
