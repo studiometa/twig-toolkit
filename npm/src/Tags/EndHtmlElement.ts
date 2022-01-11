@@ -1,4 +1,5 @@
-import { ExtendTagOptions } from 'twig';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import type { ExtendTagOptions } from 'twig';
 import { AbstractTag } from './AbstractTag.js';
 
 /**
