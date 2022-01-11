@@ -31,6 +31,7 @@ module.exports = {
         },
       },
       rules: {
+        '@typescript-eslint/ban-ts-comment': 'off',
         'import/prefer-default-export': 'off',
         'import/extensions': [
           2,
