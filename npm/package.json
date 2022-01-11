@@ -1,6 +1,6 @@
 {
   "name": "@studiometa/twig-toolkit",
-  "version": "2.0.0-alpha.1",
+  "version": "2.0.0-alpha.2",
   "description": "A set of useful extension and components for Twig.",
   "publishConfig": {
     "access": "public"
