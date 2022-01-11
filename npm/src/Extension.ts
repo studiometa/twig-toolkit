@@ -7,7 +7,7 @@ import {
   mergeAttributes,
 } from './Helpers/Html.js';
 import { HtmlElement } from './Tags/HtmlElement.js';
-import { EndHtmlElement } from './Tags/EndHtmlElement';
+import { EndHtmlElement } from './Tags/EndHtmlElement.js';
 
 /**
  * Extend Twig.
