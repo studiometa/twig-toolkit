@@ -74,6 +74,10 @@ class Extension extends AbstractExtension
                 [Html::class, 'renderAttributes'],
                 ['needs_environment' => true, 'is_safe' => ['html']]
             ),
+            new TwigFunction(
+                'merge_html_attributes',
+                [Html::class, 'mergeAttributes']
+            ),
         ];
     }
 
