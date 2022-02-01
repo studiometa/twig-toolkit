@@ -58,6 +58,10 @@ class Html
      */
     public static function renderClass($class):string
     {
+        if (empty($class)) {
+            return '';
+        }
+
         if (is_string($class)) {
             return $class;
         }

@@ -26,6 +26,14 @@ test('The `{{ html_classes() }}` Twig function should accept an array of string 
     assertMatchesSnapshot(test()->twig->render('index'));
 });
 
+test('The `{{ html_classes() }}` Twig function should accept an empty array.', function () {
+    $tpl = <<<EOD
+    {{ html_classes([]) }}
+    EOD;
+    test()->loader->setTemplate('index', $tpl);
+    assertMatchesSnapshot(test()->twig->render('index'));
+});
+
 test('The `{{ html_classes() }}` Twig function should accept an object parameter', function () {
     $tpl = <<<EOD
     {{ html_classes({ block: true, hidden: null, relative: false }) }}
