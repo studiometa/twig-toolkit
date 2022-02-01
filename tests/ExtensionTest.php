@@ -31,3 +31,31 @@ test('The extension should add the `merge_html_attributes` filter.', function ()
     test()->loader->setTemplate('index', $tpl);
     expect(test()->twig->render('index'))->toEqual(' id="baz"');
 });
+
+test('The `merge_html_attributes` filter can be used as a function.', function () {
+    $tpl = <<<EOD
+    {{ html_attributes(merge_html_attributes({ id: 'foo' }, { id: 'bar' }, { id: 'baz' })) }}
+    EOD;
+    test()->loader->setTemplate('index', $tpl);
+    expect(test()->twig->render('index'))->toEqual(' id="baz"');
+});
+
+test('The `merge_html_attributes` filter can be used with one or multiple undefined parameters.', function () {
+    $tpl = <<<EOD
+    {{ html_attributes(attr|merge_html_attributes({ id: 'bar' }, { id: 'baz' })) }}
+    EOD;
+    test()->loader->setTemplate('index', $tpl);
+    expect(test()->twig->render('index'))->toEqual(' id="baz"');
+
+    $tpl = <<<EOD
+    {{ html_attributes(merge_html_attributes(attr, { id: 'bar' }, { id: 'baz' })) }}
+    EOD;
+    test()->loader->setTemplate('index', $tpl);
+    expect(test()->twig->render('index'))->toEqual(' id="baz"');
+
+    $tpl = <<<EOD
+    {{ html_attributes(merge_html_attributes(attr, { id: 'bar' }, required_attr)) }}
+    EOD;
+    test()->loader->setTemplate('index', $tpl);
+    expect(test()->twig->render('index'))->toEqual(' id="bar"');
+});

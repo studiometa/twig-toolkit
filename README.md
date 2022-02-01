@@ -100,6 +100,8 @@ A function to render HTML attributes more easily with the following features:
 
 Merge HTML attributes smartly, useful to define default and required attributes at the component level and allow users to add custom ones.
 
+This filter can also be used as a function.
+
 **Params**
 - `attr` (`Object`): The user provided attributes
 - `default` (`Object`): The default attributes
@@ -120,16 +122,15 @@ You can define default and required attributes in a component's template:
  */
 #}
 
-{% set attributes = attr|default({}) %}
 {% set default_attributes = { class: 'bar' } %}
 {% set required_attributes = { data_component: 'Component' } %}
 
 {# Merge all attributes #}
-{% set final_attributes = attributes|merge_html_attributes(default_attributes, required_attributes)}
+{% set attributes = attr|merge_html_attributes(default_attributes, required_attributes)}
 
-<div {{ html_attributes(final_attributes)) }}></div>
+<div {{ html_attributes(attributes) }}></div>
 {# or #}
-{% html_element 'div' with final_attributes %}
+{% html_element 'div' with attributes %}
 ```
 
 And then include your component with custom attributes:

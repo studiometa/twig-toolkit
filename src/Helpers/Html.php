@@ -131,10 +131,22 @@ class Html
      * @return array
      */
     public static function mergeAttributes(
-        array $attributes,
-        array $default = [],
-        array $required = []
+        $attributes,
+        $default = [],
+        $required = []
     ):array {
+        if (empty($attributes)) {
+            $attributes = [];
+        }
+
+        if (empty($default)) {
+            $default = [];
+        }
+
+        if (empty($required)) {
+            $required = [];
+        }
+
         // Merge `class` attributes before the others
         $required['class'] = array_filter([
             $attributes['class'] ?? $default['class'] ?? '',
