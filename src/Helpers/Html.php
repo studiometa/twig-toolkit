@@ -58,6 +58,10 @@ class Html
      */
     public static function renderClass($class):string
     {
+        if (empty($class)) {
+            return '';
+        }
+
         if (is_string($class)) {
             return $class;
         }
@@ -127,10 +131,22 @@ class Html
      * @return array
      */
     public static function mergeAttributes(
-        array $attributes,
-        array $default = [],
-        array $required = []
+        $attributes,
+        $default = [],
+        $required = []
     ):array {
+        if (empty($attributes)) {
+            $attributes = [];
+        }
+
+        if (empty($default)) {
+            $default = [];
+        }
+
+        if (empty($required)) {
+            $required = [];
+        }
+
         // Merge `class` attributes before the others
         $required['class'] = array_filter([
             $attributes['class'] ?? $default['class'] ?? '',
