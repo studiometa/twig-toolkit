@@ -205,6 +205,11 @@ class Html
 
             $value = twig_escape_filter($env, $value, 'html_attr', $env->getCharset());
 
+            // Do not add empty attributes
+            if (empty($value)) {
+                continue;
+            }
+
             $renderedAttributes[] = sprintf('%s="%s"', $key, $value);
         }
 

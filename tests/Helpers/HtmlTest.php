@@ -89,6 +89,14 @@ test('The `{{ html_attributes() }}` Twig function should not render falsy attrib
     assertMatchesSnapshot(test()->twig->render('index'));
 });
 
+test('The `{{ html_attributes() }}` Twig function should not render empty attributes', function () {
+    $tpl = <<<EOD
+    {{ html_attributes({ empty_string: '', nullish: null, empty_array: [] }) }}
+    EOD;
+    test()->loader->setTemplate('index', $tpl);
+    assertMatchesSnapshot(test()->twig->render('index'));
+});
+
 test('The `{{ attr|merge_html_attributes() }}` Twig filter should merge default attributes', function () {
     $tpl = <<<EOD
     {% set attributes = { id: 'foo', class: 'block' } %}
