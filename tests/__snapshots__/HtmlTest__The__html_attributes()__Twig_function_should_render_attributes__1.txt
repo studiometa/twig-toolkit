@@ -1,1 +1,1 @@
- id="foo" class="block&#x20;foo" required aria-hidden="true" style="display&#x3A;&#x20;none&#x3B;"
+ id="foo" class="block m:hidden foo" required aria-hidden="true" style="display: none;"
