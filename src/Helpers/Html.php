@@ -203,7 +203,13 @@ class Html
                 $value = json_encode($value);
             }
 
-            $value = twig_escape_filter($env, $value, 'html_attr', $env->getCharset());
+            // Escape value and replace some escaped characters to improve
+            // readability for the generated HTML.
+            $value = str_replace(
+                ['&#x20;', '&#x3A;', '&#x3B;'],
+                [' ', ':', ';'],
+                twig_escape_filter($env, $value, 'html_attr', $env->getCharset())
+            );
 
             // Do not add empty attributes
             if (empty($value)) {

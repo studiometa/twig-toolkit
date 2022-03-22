@@ -71,7 +71,7 @@ test('The `{{ html_attributes() }}` Twig function should render attributes', fun
     $tpl = <<<EOD
     {{ html_attributes({
         id: 'foo',
-        class: ['block', { foo: true, bar: false }],
+        class: ['block m:hidden', { foo: true, bar: false }],
         required: true,
         aria_hidden: 'true',
         style: { display: 'none' }
@@ -92,6 +92,14 @@ test('The `{{ html_attributes() }}` Twig function should not render falsy attrib
 test('The `{{ html_attributes() }}` Twig function should not render empty attributes', function () {
     $tpl = <<<EOD
     {{ html_attributes({ empty_string: '', nullish: null, empty_array: [] }) }}
+    EOD;
+    test()->loader->setTemplate('index', $tpl);
+    assertMatchesSnapshot(test()->twig->render('index'));
+});
+
+test('The `{{ html_attributes() }}` Twig function should prevent XSS attacks', function () {
+    $tpl = <<<EOD
+    {{ html_attributes({ class: '" onclick="alert(true)' }) }}
     EOD;
     test()->loader->setTemplate('index', $tpl);
     assertMatchesSnapshot(test()->twig->render('index'));
