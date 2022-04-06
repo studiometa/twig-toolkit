@@ -1,1 +1,1 @@
- id="bar" class="block&#x20;foo&#x20;my-component"
+ id="bar" class="block foo my-component"
