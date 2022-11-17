@@ -1,0 +1,66 @@
+# Changelog
+
+All notable changes to this project will be documented in this file.
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [Unreleased]
+
+## v1.3.0
+
+### Added
+
+- Add a `twig_toolkit_url` function to wrap a string in a `Spatie\Url\Url` instance from the [`spatie/url` package](https://github.com/spatie/url) (#15)
+
+## v1.2.2
+
+## Fixed
+
+- Fix `renderAttributes` to be compliant with PHP 8.1 (#14)
+
+## v1.2.1
+
+## Fixed
+
+- Do not render empty attributes (#12)
+
+## Changed
+
+- Improve readability of rendered HTML (#12)
+
+## v1.2.0
+
+## Added
+
+- Add support for null parameters for the `merge_html_attributes` filter (4230c37, #10)
+- Add a `merge_html_attributes` function based on the filter of the same name (fdddef2, #10)
+
+## Fixed
+
+- Fix warnings when using `html_classes` with an empty array (#9)
+
+## v1.1.0
+
+## Added
+
+- Add a `merge_html_attributes(default, required)` filter (#7)
+- Add a `html_styles()` function (#3)
+- Add test coverage
+
+## v1.0.1
+
+## Changed
+
+- Rename the `class()` and `attributes()` Twig functions to `html_classes()` and `html_attributes()` (815cd6c)
+
+## Fixed
+
+- Fix a bug where falsy attributes were still added to the rendered attributes (e445a35)
+
+## v1.0.0
+
+## Added
+
+- Add a `{% html_element 'div'%}` tag (#1)
+- Add a `{{ class() }}` function (#1)
+- Add a `{{ attributes() }}` function (#1)
