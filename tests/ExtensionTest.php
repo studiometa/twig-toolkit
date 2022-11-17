@@ -59,3 +59,12 @@ test('The `merge_html_attributes` filter can be used with one or multiple undefi
     test()->loader->setTemplate('index', $tpl);
     expect(test()->twig->render('index'))->toEqual(' id="bar"');
 });
+
+test('The extension should add a `twig_toolkit_url` function', function() {
+    $tpl = <<<EOD
+    {{ twig_toolkit_url('/foo/bar').withQueryParameter('key', 'value') }}
+    EOD;
+
+    test()->loader->setTemplate('index', $tpl);
+    assertMatchesSnapshot(expect(test()->twig->render('index')));
+});
