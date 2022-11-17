@@ -44,9 +44,11 @@ When provided with a `\Twig\Loader\FilesystemLoader` parameter, the extension wi
 A function to manage classes more easily.
 
 **Params**
+
 - `classes` (`String | Array | Object`)
 
 **Examples**
+
 ```twig
 {# The following examples will render the same HTML #}
 <div class="{{ html_classes('foo bar') }}"></div>
@@ -63,9 +65,11 @@ A function to manage classes more easily.
 A function to manage style attributes more easily.
 
 **Params**
+
 - `styles` (`Object`)
 
 **Examples**
+
 ```twig
 <div style="{{ html_styles({ display: 'none', margin_top: '10px' }) }}"></div>
 <div style="display: none; margin-top: 10px"></div>
@@ -84,9 +88,11 @@ A function to render HTML attributes more easily with the following features:
 - Values will be escaped to prevent XSS attacks
 
 **Params**
+
 - `attrs` (`Object`): The attributes to render
 
 **Examples**
+
 ```twig
 <div {{ html_attributes({ id: 'one', data_options: { label: 'close' }, required: true }) }}></div>
 
@@ -94,15 +100,14 @@ A function to render HTML attributes more easily with the following features:
 <div id="one" data-options="{\"label\":\"close\"}" required></div>
 ```
 
-### Filters
-
-### `{{ attr|merge_html_attributes(default, required) }}`
+#### `{{ merge_html_attributes(attr, default_attr, required_attr) }}`
 
 Merge HTML attributes smartly, useful to define default and required attributes at the component level and allow users to add custom ones.
 
 This filter can also be used as a function.
 
 **Params**
+
 - `attr` (`Object`): The user provided attributes
 - `default` (`Object`): The default attributes
 - `required` (`Object`): The required attributes
@@ -126,7 +131,7 @@ You can define default and required attributes in a component's template:
 {% set required_attributes = { data_component: 'Component' } %}
 
 {# Merge all attributes #}
-{% set attributes = attr|merge_html_attributes(default_attributes, required_attributes)}
+{% set attributes = merge_html_attributes(attr, default_attributes, required_attributes)}
 
 <div {{ html_attributes(attributes) }}></div>
 {# or #}
@@ -148,7 +153,25 @@ You can take advantage of [named arguments](http://twig.symfony.com/doc/3.x/temp
 
 ```twig
 {% set required_attributes = { id: 'block' } %}
-{{ attr|merge_html_attributes(required=required_attribute)}}
+{% set merged_attributes = merge_html_attributes(attr, required=required_attribute) %}
+```
+
+#### `{{ twig_toolkit_url(string) }}`
+
+Wrapper for the `Spatie\Url\Url` class to easily manipulate URLs. See the [`spatie/url` documentation](https://github.com/spatie/url) for details on its API.
+
+**Params**
+
+- `url` (`string`): The URL to parse for manipulation
+
+**Examples**
+
+```twig
+{# Change host #}
+{% set url = twig_toolkit_url(url).withHost('cdn.fqdn.com') %}
+
+{# Change/add query parameters #}
+{% set url = twig_toolkit_url(url).withQueryParameter('key', 'value') %}
 ```
 
 ### Tags
@@ -158,10 +181,12 @@ You can take advantage of [named arguments](http://twig.symfony.com/doc/3.x/temp
 Render an HTML element with the given attributes. Useful to avoid setting dynamic HTML element tags with the `<{{ tag }}>...</{{ tag }}>` pattern.
 
 **Params**
+
 - `tag` (`String`): The name of the tag
 - `attrs` (`Object`): An object describing the element's attribues
 
 **Examples**
+
 ```twig
 {# Twig #}
 {% html_element 'h1' with { class: 'block' } %}
