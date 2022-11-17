@@ -6,7 +6,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
-## v1.3.0
+## v1.3.1 (2022-11-17)
+
+### Fixed
+
+- Fix `twig_toolkit_url` function throwing an error when used with a `null` value ([#16](https://github.com/studiometa/twig-toolkit/pull/16))
+
+## v1.3.0 (2022-11-17)
 
 ### Added
 

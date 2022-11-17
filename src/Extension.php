@@ -9,15 +9,14 @@ namespace Studiometa\TwigToolkit;
 
 use Studiometa\TwigToolkit\Helpers\Html;
 use Studiometa\TwigToolkit\Helpers\Template;
+use Studiometa\TwigToolkit\Helpers\Url;
 use Studiometa\TwigToolkit\Node\ElementNode;
 use Studiometa\TwigToolkit\TokenParser\ElementTokenParser;
-
 use Twig\Extension\AbstractExtension;
 use Twig\Loader\FilesystemLoader;
 use Twig\TokenParser\TokenParserInterface;
-use Twig\TwigFunction;
 use Twig\TwigFilter;
-use Spatie\Url\Url;
+use Twig\TwigFunction;
 
 /**
  * Twig extension class.
