@@ -17,6 +17,7 @@ use Twig\Loader\FilesystemLoader;
 use Twig\TokenParser\TokenParserInterface;
 use Twig\TwigFunction;
 use Twig\TwigFilter;
+use Spatie\Url\Url;
 
 /**
  * Twig extension class.
@@ -77,6 +78,10 @@ class Extension extends AbstractExtension
             new TwigFunction(
                 'merge_html_attributes',
                 [Html::class, 'mergeAttributes']
+            ),
+            new TwigFunction(
+                'twig_toolkit_url',
+                [Url::class, 'fromString'],
             ),
         ];
     }
