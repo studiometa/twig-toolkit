@@ -10,23 +10,23 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Added
 
-- Add a `twig_toolkit_url` function to wrap a string in a `Spatie\Url\Url` instance from the [`spatie/url` package](https://github.com/spatie/url) (#15)
+- Add a `twig_toolkit_url` function to wrap a string in a `Spatie\Url\Url` instance from the [`spatie/url` package](https://github.com/spatie/url) ([#15](https://github.com/studiometa/twig-toolkit/pull/15))
 
 ## v1.2.2
 
 ## Fixed
 
-- Fix `renderAttributes` to be compliant with PHP 8.1 (#14)
+- Fix `renderAttributes` to be compliant with PHP 8.1 ([#14](https://github.com/studiometa/twig-toolkit/pull/14))
 
 ## v1.2.1
 
 ## Fixed
 
-- Do not render empty attributes (#12)
+- Do not render empty attributes ([#12](https://github.com/studiometa/twig-toolkit/pull/12))
 
 ## Changed
 
-- Improve readability of rendered HTML (#12)
+- Improve readability of rendered HTML ([#12](https://github.com/studiometa/twig-toolkit/pull/12))
 
 ## v1.2.0
 
@@ -37,14 +37,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Fixed
 
-- Fix warnings when using `html_classes` with an empty array (#9)
+- Fix warnings when using `html_classes` with an empty array ([#9](https://github.com/studiometa/twig-toolkit/pull/9))
 
 ## v1.1.0
 
 ## Added
 
-- Add a `merge_html_attributes(default, required)` filter (#7)
-- Add a `html_styles()` function (#3)
+- Add a `merge_html_attributes(default, required)` filter ([#7](https://github.com/studiometa/twig-toolkit/pull/7))
+- Add a `html_styles()` function ([#3](https://github.com/studiometa/twig-toolkit/pull/3))
 - Add test coverage
 
 ## v1.0.1
@@ -61,6 +61,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Added
 
-- Add a `{% html_element 'div'%}` tag (#1)
-- Add a `{{ class() }}` function (#1)
-- Add a `{{ attributes() }}` function (#1)
+- Add a `{% html_element 'div'%}` tag ([#1](https://github.com/studiometa/twig-toolkit/pull/1))
+- Add a `{{ class() }}` function ([#1](https://github.com/studiometa/twig-toolkit/pull/1))
+- Add a `{{ attributes() }}` function ([#1](https://github.com/studiometa/twig-toolkit/pull/1))
