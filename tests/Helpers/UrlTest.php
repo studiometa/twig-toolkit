@@ -11,3 +11,8 @@ test('The `Url` class should work with null given as $url', function () {
     expect((string)Url::fromString(null))->toBe('');
     expect((string)Url::fromString(null)->withHost('fqdn.tld'))->toBe('//fqdn.tld');
 });
+
+
+test('The `Url` class should not encode URL parameters', function () {
+    expect((string)Url::fromString('http://localhost/?key=value&foo=1/2'))->toBe('http://localhost?key=value&foo=1/2');
+});

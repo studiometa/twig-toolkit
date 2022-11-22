@@ -6,6 +6,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## v1.3.2 (2022-11-22)
+
+### Fixed
+- Fix query parameters being encoded ([cb3a820](https://github.com/studiometa/twig-toolkit/commit/cb3a820))
+
 ## v1.3.1 (2022-11-17)
 
 ### Fixed
