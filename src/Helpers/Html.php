@@ -213,8 +213,8 @@ class Html
             // Escape value and replace some escaped characters to improve
             // readability for the generated HTML.
             $value = str_replace(
-                ['&#x20;', '&#x3A;', '&#x3B;'],
-                [' ', ':', ';'],
+                ['&#x20;', '&#x3A;', '&#x3B;', '&#x2F;'],
+                [' ', ':', ';', '/'],
                 $value
             );
 
