@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## v1.3.4 (2022-12-06)
+
+### Fixed
+
+- Fixed mismatch of version number ([41693ef](https://github.com/studiometa/twig-toolkit/commit/41693ef))
+
 ## v1.3.3 (2022-12-06)
 
 ### Fixed
