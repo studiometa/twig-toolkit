@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## v1.3.5 (2023-07-13)
+
+### Fixed
+
+- Fix handling of CSS custom properties by the `html_styles` function ([2ce4f36](https://github.com/studiometa/twig-toolkit/commit/2ce4f36))
+
 ## v1.3.4 (2022-12-06)
 
 ### Fixed
