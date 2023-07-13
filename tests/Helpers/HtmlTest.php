@@ -67,6 +67,14 @@ test('The `{{ html_styles() }}` Twig function should render inline CSS.', functi
     assertMatchesSnapshot(test()->twig->render('index'));
 });
 
+test('The `{{ html_styles() }}` Twig function should render inline CSS with CSS custom properties.', function () {
+    $tpl = <<<EOD
+    {{ html_styles({ '--var': 'none', margin_right: '10px' }) }}
+    EOD;
+    test()->loader->setTemplate('index', $tpl);
+    assertMatchesSnapshot(test()->twig->render('index'));
+});
+
 test('The `{{ html_attributes() }}` Twig function should render attributes', function () {
     $tpl = <<<EOD
     {{ html_attributes({
