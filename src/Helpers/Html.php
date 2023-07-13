@@ -110,8 +110,11 @@ class Html
             }
 
             // Convert property to kebab-case as it is the only
-            // valid case format for CSS properties.
-            $property = (new Convert($property))->toKebab();
+            // valid case format for CSS properties, but only if
+            // it is not a CSS custom variable starting with `--`.
+            if (strpos($property, '--') !== 0) {
+                $property = (new Convert($property))->toKebab();
+            }
             $renderedStyle[] = sprintf('%s: %s;', $property, $value);
         }
 
