@@ -10,7 +10,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Fixed
 
-- Fix a bug with Twig 3.9.0 ([#23](https://github.com/studiometa/twig-toolkit/pull/23))
+- Fix the `html_element` tag with Twig 3.9.0 ([#23](https://github.com/studiometa/twig-toolkit/pull/23))
 
 ## v1.3.5 (2023-07-13)
 
