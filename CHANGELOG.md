@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## v1.3.6 (2024-04-18)
+
 ### Fixed
 
 - Fix a bug with Twig 3.9.0 ([#23](https://github.com/studiometa/twig-toolkit/pull/23))
