@@ -208,8 +208,8 @@ class Html
 
             $value = twig_escape_filter($env, $value, 'html_attr', $env->getCharset());
 
-            // Do not add empty attributes
-            if (empty($value)) {
+            // Do not add empty attributes, unless it is alt
+            if (empty($value) && $key !== 'alt') {
                 continue;
             }
 
