@@ -99,7 +99,7 @@ test('The `{{ html_attributes() }}` Twig function should not render falsy attrib
 
 test('The `{{ html_attributes() }}` Twig function should not render empty attributes', function () {
     $tpl = <<<EOD
-    {{ html_attributes({ empty_string: '', nullish: null, empty_array: [] }) }}
+    {{ html_attributes({ empty_string: '', truthy: true, falsy: false, nullish: null, empty_array: [] }) }}
     EOD;
     test()->loader->setTemplate('index', $tpl);
     assertMatchesSnapshot(test()->twig->render('index'));

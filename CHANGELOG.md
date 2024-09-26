@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## v1.3.7 (2024-09-18)
+
+### Fixed
+
+- Fix attribute rendering by omitting `null` or `false` attributes instead of empty attributes ([#26](https://github.com/studiometa/twig-toolkit/pull/26))
+
 ## v1.3.6 (2024-04-18)
 
 ### Fixed
