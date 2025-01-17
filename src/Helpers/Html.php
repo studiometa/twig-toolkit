@@ -8,6 +8,7 @@
 namespace Studiometa\TwigToolkit\Helpers;
 
 use Twig\Environment;
+use Twig\Runtime\EscaperRuntime;
 use Jawira\CaseConverter\Convert;
 
 /**
@@ -206,7 +207,7 @@ class Html
                 $value = json_encode($value);
             }
 
-            $value = twig_escape_filter($env, $value, 'html_attr', $env->getCharset());
+            $value = $env->getRuntime(EscaperRuntime::class)->escape($value, 'html_attr', $env->getCharset());
 
             // Do not add null & false attributes
             if (is_null($value) || $value === false) {
@@ -240,10 +241,10 @@ class Html
         Environment $env,
         string $name,
         array $attributes = [],
-        string $content = null
+        string|null $content = null
     ):string {
         $attributes = static::renderAttributes($env, $attributes);
-        $name = twig_escape_filter($env, $name, 'html_attr', $env->getCharset());
+        $name = $env->getRuntime(EscaperRuntime::class)->escape($name, 'html_attr', $env->getCharset());
 
         // Render self closing tags.
         if (in_array($name, self::SELF_CLOSING_TAGS)) {
