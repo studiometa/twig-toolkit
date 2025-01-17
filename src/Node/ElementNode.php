@@ -17,6 +17,7 @@ use Twig\Node\NodeCaptureInterface;
  * @author Studio Meta <agence@studiometa.fr>
  * @since 1.0.0
  */
+#[\Twig\Attribute\YieldReady]
 class ElementNode extends Node implements NodeCaptureInterface
 {
     /**
@@ -25,22 +26,14 @@ class ElementNode extends Node implements NodeCaptureInterface
     public function compile(Compiler $compiler)
     {
         if ($this->getAttribute('capture')) {
-            if (class_exists('Twig\Node\CaptureNode')) {
-                $compiler->write('$body = ');
-                $node = new \Twig\Node\CaptureNode(
-                    $this->getNode('body'),
-                    $this->getNode('body')->lineno,
-                    $this->getNode('body')->tag
-                );
-                $node->setAttribute('with_blocks', true);
-                $compiler->subcompile($node);
-            } else {
-                $compiler->write("ob_start();\n");
-                $compiler->subcompile($this->getNode('body'));
-                $compiler->write(
-                    '$body = ("" === $tmp = ob_get_clean()) ? null : new Markup($tmp, $this->env->getCharset());'
-                );
-            }
+            $compiler->write('$body = ');
+            $node = new \Twig\Node\CaptureNode(
+                $this->getNode('body'),
+                $this->getNode('body')->lineno,
+                $this->getNode('body')->tag
+            );
+            $node->setAttribute('with_blocks', true);
+            $compiler->subcompile($node);
             $compiler->raw("\n");
         } else {
             $compiler->write('$body = null;')->raw("\n");
@@ -49,7 +42,7 @@ class ElementNode extends Node implements NodeCaptureInterface
         // Element
         $compiler
             ->addDebugInfo($this)
-            ->write('echo $dom = \Studiometa\TwigToolkit\Helpers\Html::renderTag($this->env, ')
+            ->write('yield $dom = \Studiometa\TwigToolkit\Helpers\Html::renderTag($this->env, ')
             ->subcompile($this->getNode('element'))
             ->raw(', ');
 

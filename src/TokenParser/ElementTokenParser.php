@@ -58,7 +58,7 @@ final class ElementTokenParser extends AbstractTokenParser
             $stream->expect(Token::BLOCK_END_TYPE);
         }
 
-        return new ElementNode($nodes, ['capture' => $capture], $token->getLine(), $this->getTag());
+        return new ElementNode($nodes, ['capture' => $capture], $token->getLine());
     }
 
     /**
