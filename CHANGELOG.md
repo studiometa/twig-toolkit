@@ -6,10 +6,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## v2.0.0 (2025-01-20)
+
 ### Changed
 
 - ⚠️ Update minimum Twig version to 3.0 ([#30](https://github.com/studiometa/twig-toolkit/pull/30))
 - ⚠️ Update minimum PHP version to 8.1 ([#30](https://github.com/studiometa/twig-toolkit/pull/30), [6134a42](https://github.com/studiometa/twig-toolkit/commit/6134a42))
+- Update spatie/url to ^2.4 ([ffcf361](https://github.com/studiometa/twig-toolkit/commit/ffcf361))
 
 ### Removed
 
