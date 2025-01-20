@@ -1,4 +1,4 @@
-# Twig toolkit
+# studiometa/twig-toolkit
 
 [![Packagist Version](https://img.shields.io/github/v/release/studiometa/twig-toolkit?style=flat&colorB=3e63dd&colorA=414853&label=packagist)](https://packagist.org/packages/studiometa/twig-toolkit)
 [![Downloads](https://img.shields.io/packagist/dm/studiometa/twig-toolkit?style=flat&colorB=3e63dd&colorA=414853)](https://packagist.org/packages/studiometa/twig-toolkit)
