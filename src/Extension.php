@@ -31,7 +31,7 @@ class Extension extends AbstractExtension
      *
      * @param FilesystemLoader|null $loader The Twig FilesystemLoader instance.
      */
-    public function __construct(FilesystemLoader $loader = null)
+    public function __construct(FilesystemLoader|null $loader = null)
     {
         if ($loader) {
             Template::addMetaNamespace($loader);

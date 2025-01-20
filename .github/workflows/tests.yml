@@ -1,4 +1,4 @@
-name: Tests
+name: tests
 
 on:
   push:
@@ -8,67 +8,15 @@ on:
   pull_request:
 
 jobs:
-  phpcs:
-    name: PHPCS
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Cache Composer dependencies
-        uses: actions/cache@v2
-        with:
-          path: /tmp/composer-cache
-          key: ${{ runner.os }}-${{ hashFiles('**/composer.lock') }}
-
-      - uses: php-actions/composer@v5
-
-      - name: PHPCS
-        run: composer run phpcs
-
-  phpstan:
-    name: PHPStan
-    runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        php-versions: ['7.4', '8.0', '8.1', '8.2', '8.3']
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Setup PHP, with composer and xdebug
-        uses: shivammathur/setup-php@v2 #https://github.com/shivammathur/setup-php
-        with:
-          php-version: ${{ matrix.php-versions }}
-          coverage: xdebug
-
-      - name: Get composer cache directory
-        id: composer-cache
-        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
-
-      - name: Cache composer dependencies
-        uses: actions/cache@v2
-        with:
-          path: ${{ steps.composer-cache.outputs.dir }}
-          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
-          restore-keys: ${{ runner.os }}-composer-
-
-      - name: Install Composer dependencies
-        run: composer install --no-progress --prefer-dist --optimize-autoloader
-
-      - name: PHPStan
-        run: composer run phpstan
-
   test:
-    name: Unit test
+    name: pest
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-        php-versions: ['7.4', '8.0', '8.1', '8.2', '8.3']
-        twig-versions: ['^2.10', '^3']
+        php-versions: ['8.1', '8.2', '8.3', '8.4']
     env:
       PHP_VERSION: ${{ matrix.php-versions }}
-      TWIG_VERSION: ${{ matrix.twig-versions }}
     steps:
       - uses: actions/checkout@v2
 
@@ -90,10 +38,11 @@ jobs:
           restore-keys: ${{ runner.os }}-composer-
 
       - name: Install Composer dependencies
-        run: composer install --no-progress --prefer-dist --optimize-autoloader
+        run: composer install --no-progress --prefer-dist --optimize-autoloader --ignore-platform-reqs
 
-      - name: Install Twig specific version
-        run: composer require twig/twig:${{ matrix.twig-versions }}
+      - name: Install Pest v3
+        run: composer require pest/pest:^3.0
+        if: ${{ matrix.php-version == '8.4' }}
 
       - name: Pest
         run: php -v && XDEBUG_MODE=coverage ./vendor/bin/pest --coverage --coverage-clover='coverage.xml'
@@ -102,7 +51,7 @@ jobs:
         uses: codecov/codecov-action@v4
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          env_vars: PHP_VERSION,TWIG_VERSION
+          env_vars: PHP_VERSION
           file: ./coverage.xml
           flags: unittests
           fail_ci_if_error: false

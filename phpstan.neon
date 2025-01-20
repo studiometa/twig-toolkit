@@ -1,11 +1,8 @@
-#$ vendor/bin/phpstan analyze
 parameters:
   level: max
   paths:
     - src
-  checkMissingIterableValueType: false
   scanDirectories:
     - ./vendor/twig/twig/src/Extension/
   ignoreErrors:
-    - message: '#^If condition is always true\.#'
-      path: ./src/TokenParser/ElementTokenParser.php
+    - identifier: missingType.iterableValue

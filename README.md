@@ -1,7 +1,10 @@
 # Twig toolkit
 
-[![Packagist Version](https://img.shields.io/github/v/release/studiometa/twig-toolkit?include_prereleases&label=packagist&style=flat-square)](https://packagist.org/packages/studiometa/twig-toolkit)
-[![License MIT](https://img.shields.io/packagist/l/studiometa/twig-toolkit?style=flat-square)](https://github.com/studiometa/twig-toolkit/blob/master/LICENSE)
+[![Packagist Version](https://img.shields.io/github/v/release/studiometa/twig-toolkit?style=flat&colorB=3e63dd&colorA=414853&label=packagist)](https://packagist.org/packages/studiometa/twig-toolkit)
+[![Downloads](https://img.shields.io/packagist/dm/studiometa/twig-toolkit?style=flat&colorB=3e63dd&colorA=414853)](https://packagist.org/packages/studiometa/twig-toolkit)
+[![Dependency Status](https://img.shields.io/librariesio/github/studiometa/twig-toolkit?style=flat&colorB=3e63dd&colorA=414853)](https://packagist.org/packages/studiometa/twig-toolkit)
+![Codecov](https://img.shields.io/codecov/c/github/studiometa/twig-toolkit?style=flat&colorB=3e63dd&colorA=414853)
+[![License MIT](https://img.shields.io/packagist/l/studiometa/twig-toolkit?style=flat&colorB=3e63dd&colorA=414853)](https://github.com/studiometa/twig-toolkit/blob/master/LICENSE)
 
 > A set of useful extension and components for Twig.
 
