@@ -113,11 +113,11 @@ test('The `{{ html_attributes() }}` Twig function should prevent XSS attacks', f
     assertMatchesSnapshot(test()->twig->render('index'));
 });
 
-test('The `{{ attr|merge_html_attributes() }}` Twig filter should merge default attributes', function () {
+test('The `{{ merge_html_attributes(attr) }}` Twig function should merge default attributes', function () {
     $tpl = <<<EOD
     {% set attributes = { id: 'foo', class: 'block' } %}
     {{ html_attributes(
-        attributes|merge_html_attributes({
+        merge_html_attributes(attributes, {
             id: 'bar',
             class: 'bg-red'
         })
@@ -129,7 +129,7 @@ test('The `{{ attr|merge_html_attributes() }}` Twig filter should merge default 
     $tpl = <<<EOD
     {% set attributes = { id: 'foo', class: 'block' } %}
     {{ html_attributes(
-        attributes|merge_html_attributes({
+        merge_html_attributes(attributes, {
             id: 'bar',
         })
     ) }}
@@ -140,7 +140,7 @@ test('The `{{ attr|merge_html_attributes() }}` Twig filter should merge default 
      $tpl = <<<EOD
     {% set attributes = { data_component: 'foo' } %}
     {{ html_attributes(
-        attributes|merge_html_attributes({
+        merge_html_attributes(attributes, {
             id: 'bar',
             class: 'default'
         })
@@ -150,11 +150,11 @@ test('The `{{ attr|merge_html_attributes() }}` Twig filter should merge default 
     assertMatchesSnapshot(test()->twig->render('index'));
 });
 
-test('The `{{ attr|merge_html_attributes() }}` Twig filter should merge required attributes', function () {
+test('The `{{ merge_html_attributes(attr) }}` Twig function should merge required attributes', function () {
     $tpl = <<<EOD
     {% set attributes = { id: 'foo', class: ['block', { foo: true, bar: false }] } %}
     {{ html_attributes(
-        attributes|merge_html_attributes({}, {
+        merge_html_attributes(attributes, {}, {
             id: 'bar',
             class: 'my-component'
         })
@@ -164,11 +164,11 @@ test('The `{{ attr|merge_html_attributes() }}` Twig filter should merge required
     assertMatchesSnapshot(test()->twig->render('index'));
 });
 
-test('The `{{ attr|merge_html_attributes() }}` Twig filter should merge required attributes with named argument', function () {
+test('The `{{ merge_html_attributes(attr) }}` Twig function should merge required attributes with named argument', function () {
     $tpl = <<<EOD
     {% set attributes = { id: 'foo', class: ['block', { foo: true, bar: false }] } %}
     {{ html_attributes(
-        attributes|merge_html_attributes(required={
+        merge_html_attributes(attributes, required={
             id: 'bar',
             class: 'my-component'
         })
@@ -178,23 +178,23 @@ test('The `{{ attr|merge_html_attributes() }}` Twig filter should merge required
     assertMatchesSnapshot(test()->twig->render('index'));
 });
 
-test('The `{{ attr|merge_html_attributes() }}` Twig filter should merge default and required attributes', function () {
+test('The `{{ merge_html_attributes(attr) }}` Twig function should merge default and required attributes', function () {
     $tpl = <<<EOD
     {% set attributes = { id: 'foo', class: 'block' } %}
     {% set default_attributes = { id: 'bar', class: 'bg-red' } %}
     {% set required_attributes = { id: 'baz', class: 'my-component' } %}
-    {{ html_attributes(attributes|merge_html_attributes(default_attributes, required_attributes)) }}
+    {{ html_attributes(merge_html_attributes(attributes, default_attributes, required_attributes)) }}
     EOD;
     test()->loader->setTemplate('index', $tpl);
     assertMatchesSnapshot(test()->twig->render('index'));
 });
 
-test('The `{{ attr|merge_html_attributes() }}` Twig filter should merge default and required attributes with named arguments', function () {
+test('The `{{ merge_html_attributes(attr) }}` Twig filter should merge default and required attributes with named arguments', function () {
     $tpl = <<<EOD
     {% set attributes = { id: 'foo', class: 'block' } %}
     {% set default_attributes = { id: 'bar', class: 'bg-red' } %}
     {% set required_attributes = { id: 'baz', class: 'my-component' } %}
-    {{ html_attributes(attributes|merge_html_attributes(required=required_attributes, default=default_attributes)) }}
+    {{ html_attributes(merge_html_attributes(attributes, required=required_attributes, default=default_attributes)) }}
     EOD;
     test()->loader->setTemplate('index', $tpl);
     assertMatchesSnapshot(test()->twig->render('index'));
