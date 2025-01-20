@@ -7,7 +7,6 @@
 
 namespace Studiometa\TwigToolkit\Helpers;
 
-use Twig\Environment;
 use Spatie\Url\Url as UrlCore;
 
 /**
@@ -23,17 +22,15 @@ class Url extends UrlCore
      */
     public function __construct()
     {
+        parent::__construct();
         $this->query = new QueryParameterBag();
     }
 
-    /**
-     * @return self
-     */
-    public static function fromString(?string $url)
+    public static function fromString(?string $url, ?array $allowedSchemes = null): static
     {
-        $url = parent::fromString($url ?? '');
+        $url = parent::fromString($url ?? '', $allowedSchemes);
 
-        if (empty($url)) {
+        if (empty((string)$url)) {
             return $url;
         }
 
@@ -46,10 +43,7 @@ class Url extends UrlCore
         return $url;
     }
 
-    /**
-     * @return self
-     */
-    public function withQuery($query)
+    public function withQuery($query):static
     {
         $url = clone $this;
 

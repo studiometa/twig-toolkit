@@ -8,10 +8,8 @@
 namespace Studiometa\TwigToolkit\TokenParser;
 
 use Studiometa\TwigToolkit\Node\ElementNode;
-use Twig\Parser;
 use Twig\Token;
 use Twig\TokenParser\AbstractTokenParser;
-use Twig\TokenStream;
 
 /**
  * Class ElementTokenParser.
@@ -38,27 +36,21 @@ final class ElementTokenParser extends AbstractTokenParser
     {
         $stream = $this->parser->getStream();
 
-        // Get element name
-        $element = $this->parser->getExpressionParser()->parseExpression();
-        $nodes = [
-            'element' => $element,
-        ];
+        /** @var \Twig\Node\Expression\AbstractExpression */
+        $name = $this->parser->getExpressionParser()->parseExpression();
 
-        // Get attributes
+        /** @var null|\Twig\Node\Expression\AbstractExpression */
+        $variables = null;
         if ($stream->nextIf(Token::NAME_TYPE, 'with')) {
-            $nodes['attrs'] = $this->parser->getExpressionParser()->parseExpression();
+            /** @var \Twig\Node\Expression\AbstractExpression */
+            $variables = $this->parser->getExpressionParser()->parseExpression();
         }
 
         $stream->expect(Token::BLOCK_END_TYPE);
+        $body = $this->parser->subparse([$this, 'decideBlockEnd'], true);
+        $stream->expect(Token::BLOCK_END_TYPE);
 
-        // @todo detect self-closing tags to avoid parsing the content
-        $capture = true;
-        if ($capture) {
-            $nodes['body'] = $this->parser->subparse([$this, 'decideBlockEnd'], true);
-            $stream->expect(Token::BLOCK_END_TYPE);
-        }
-
-        return new ElementNode($nodes, ['capture' => $capture], $token->getLine(), $this->getTag());
+        return new ElementNode($name, $body, $variables, $token->getLine());
     }
 
     /**

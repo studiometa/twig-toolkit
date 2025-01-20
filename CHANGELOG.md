@@ -6,6 +6,21 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## v2.0.0 (2025-01-20)
+
+### Changed
+
+- ⚠️ Update minimum Twig version to 3.0 ([#30](https://github.com/studiometa/twig-toolkit/pull/30))
+- ⚠️ Update minimum PHP version to 8.1 ([#30](https://github.com/studiometa/twig-toolkit/pull/30), [6134a42](https://github.com/studiometa/twig-toolkit/commit/6134a42))
+- Update spatie/url to ^2.4 ([ffcf361](https://github.com/studiometa/twig-toolkit/commit/ffcf361))
+
+### Removed
+
+- ⚠️ Removes the `merge_html_attributes()` Twig filter, use the `merge_html_attributes` function instead ([#31](https://github.com/studiometa/twig-toolkit/pull/31))
+- ⚠️ Removes the `class` Twig function, use the `html_classes` function instead ([#31](https://github.com/studiometa/twig-toolkit/pull/31))
+- ⚠️ Removes the `attributes` Twig function, use the `html_attributes` function instead ([#31](https://github.com/studiometa/twig-toolkit/pull/31))
+- ⚠️ Removes the `@meta` alias without replacement ([#31](https://github.com/studiometa/twig-toolkit/pull/31))
+
 ## v1.3.7 (2024-09-18)
 
 ### Fixed
