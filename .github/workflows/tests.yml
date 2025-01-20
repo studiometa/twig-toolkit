@@ -18,7 +18,7 @@ jobs:
     env:
       PHP_VERSION: ${{ matrix.php-versions }}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
       - name: Setup PHP, with composer and xdebug
         uses: shivammathur/setup-php@v2 #https://github.com/shivammathur/setup-php
