@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "971ab1fb7cc76e86b1fd4f6963c21849",
+    "content-hash": "1983e55b8db690c868e4f823e094d6ee",
     "packages": [
         {
             "name": "jawira/case-converter",
@@ -177,25 +177,25 @@
         },
         {
             "name": "spatie/url",
-            "version": "1.3.5",
+            "version": "2.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/url.git",
-                "reference": "3633de58e0709ea98cecceff61ee51caf1fde7e3"
+                "reference": "93a51db743cdec22b081c64593e193887c9cd395"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/url/zipball/3633de58e0709ea98cecceff61ee51caf1fde7e3",
-                "reference": "3633de58e0709ea98cecceff61ee51caf1fde7e3",
+                "url": "https://api.github.com/repos/spatie/url/zipball/93a51db743cdec22b081c64593e193887c9cd395",
+                "reference": "93a51db743cdec22b081c64593e193887c9cd395",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.2|^8.0",
-                "psr/http-message": "^1.0",
-                "spatie/macroable": "^1.0.1"
+                "php": "^8.0",
+                "psr/http-message": "^1.0 || ^2.0",
+                "spatie/macroable": "^1.0 || ^2.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "^8.0|^9.3"
+                "pestphp/pest": "^1.21"
             },
             "type": "library",
             "autoload": {
@@ -223,9 +223,19 @@
             ],
             "support": {
                 "issues": "https://github.com/spatie/url/issues",
-                "source": "https://github.com/spatie/url/tree/1.3.5"
+                "source": "https://github.com/spatie/url/tree/2.4.0"
             },
-            "time": "2020-11-03T10:36:20+00:00"
+            "funding": [
+                {
+                    "url": "https://spatie.be/open-source/support-us",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/spatie",
+                    "type": "github"
+                }
+            ],
+            "time": "2024-03-08T11:35:19+00:00"
         },
         {
             "name": "symfony/deprecation-contracts",
