@@ -27,18 +27,6 @@ use Twig\TwigFunction;
 class Extension extends AbstractExtension
 {
     /**
-     * Register the `@meta` namespace if the $loader parameter is specifier.
-     *
-     * @param FilesystemLoader|null $loader The Twig FilesystemLoader instance.
-     */
-    public function __construct(FilesystemLoader|null $loader = null)
-    {
-        if ($loader) {
-            Template::addMetaNamespace($loader);
-        }
-    }
-
-    /**
      * Returns the token parser instances to add to the existing list.
      *
      * @return TokenParserInterface[]
