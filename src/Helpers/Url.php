@@ -31,9 +31,10 @@ class Url extends UrlCore
      */
     public static function fromString(?string $url)
     {
+        /** @var Url */
         $url = parent::fromString($url ?? '');
 
-        if (empty($url)) {
+        if (empty((string)$url)) {
             return $url;
         }
 

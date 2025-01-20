@@ -25,10 +25,16 @@ class QueryParameterBag extends QueryParameterBagCore
      */
     public function __toString()
     {
-        $keyValuePairs = Arr::map($this->parameters, function ($value, $key) {
-            return "{$key}=$value";
-        });
+        /** @var string[] */
+        $parts = [];
 
-        return implode('&', $keyValuePairs);
+        /** @var array<string, string>  */
+        $parameters = $this->parameters;
+
+        foreach ($parameters as $key => $value) {
+            $parts[] = "{$key}={$value}";
+        }
+
+        return implode('&', $parts);
     }
 }

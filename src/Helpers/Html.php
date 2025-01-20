@@ -54,8 +54,8 @@ class Html
      * Html::renderClass(['foo', ['bar' => true, 'baz' => false]]);
      * ```
      *
-     * @param  array<string|array>|string $class The class description.
-     * @return string                            A string of classes.
+     * @param  array|string $class The class description.
+     * @return string              A string of classes.
      */
     public static function renderClass($class):string
     {
@@ -103,6 +103,8 @@ class Html
     public static function renderStyleAttribute(array $styles):string
     {
         $renderedStyle = [];
+        /** @var array<string, bool|string> */
+        $styles = $styles;
 
         foreach ($styles as $property => $value) {
             // Skip boolean values that are not true and empty strings
@@ -194,7 +196,7 @@ class Html
             }
 
             // Format class attributes
-            if ($key === 'class') {
+            if ($key === 'class' && (is_array($value) || is_string($value))) {
                 $value = static::renderClass($value);
             }
 
@@ -207,6 +209,7 @@ class Html
                 $value = json_encode($value);
             }
 
+            /** @var null|false|string */
             $value = $env->getRuntime(EscaperRuntime::class)->escape($value, 'html_attr', $env->getCharset());
 
             // Do not add null & false attributes
@@ -244,6 +247,7 @@ class Html
         string|null $content = null
     ):string {
         $attributes = static::renderAttributes($env, $attributes);
+        /** @var string */
         $name = $env->getRuntime(EscaperRuntime::class)->escape($name, 'html_attr', $env->getCharset());
 
         // Render self closing tags.
