@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+### Changed
+
+- Prefer the `html` escape mode to the `html_attr` ([#33](https://github.com/studiometa/twig-toolkit/pull/33), [c093446](https://github.com/studiometa/twig-toolkit/commit/c093446))
+
 ## v2.0.0 (2025-01-20)
 
 ### Changed
