@@ -1,3 +1,3 @@
-<div aria-hidden="true" data-options="&#x7B;&quot;log&quot;:true&#x7D;">
+<div aria-hidden="true" data-options="{&quot;log&quot;:true}">
     Hello world
 </div>
