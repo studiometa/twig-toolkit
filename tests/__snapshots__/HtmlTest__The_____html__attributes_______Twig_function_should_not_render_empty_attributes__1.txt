@@ -1,1 +1,1 @@
- empty-string="" truthy empty-array="&#x5B;&#x5D;"
+ empty-string="" truthy empty-array="[]"
