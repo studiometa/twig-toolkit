@@ -210,20 +210,12 @@ class Html
             }
 
             /** @var null|false|string */
-            $value = $env->getRuntime(EscaperRuntime::class)->escape($value, 'html_attr', $env->getCharset());
+            $value = $env->getRuntime(EscaperRuntime::class)->escape($value, 'html', $env->getCharset());
 
             // Do not add null & false attributes
             if (is_null($value) || $value === false) {
                 continue;
             }
-
-            // Escape value and replace some escaped characters to improve
-            // readability for the generated HTML.
-            $value = str_replace(
-                ['&#x20;', '&#x3A;', '&#x3B;', '&#x2F;'],
-                [' ', ':', ';', '/'],
-                $value
-            );
 
             $renderedAttributes[] = sprintf('%s="%s"', $key, $value);
         }
