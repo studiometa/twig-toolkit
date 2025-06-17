@@ -15,8 +15,10 @@ jobs:
       fail-fast: false
       matrix:
         php-versions: ['8.1', '8.2', '8.3', '8.4']
+        twig-versions: ['3.19.0', '3.20.0', '3.21.0']
     env:
       PHP_VERSION: ${{ matrix.php-versions }}
+      TWIG_VERSION: ${{ matrix.twig-versions }}
     steps:
       - uses: actions/checkout@v4
 
@@ -40,6 +42,11 @@ jobs:
       - name: Install Composer dependencies
         run: composer install --no-progress --prefer-dist --optimize-autoloader --ignore-platform-reqs
 
+      - name: Install Twig version
+        run: |
+          composer require "twig/twig:~${TWIG_VERSION}" --no-progress --prefer-dist --optimize-autoloader --ignore-platform-reqs
+          composer info twig/twig
+
       - name: Install Pest v3
         run: composer require pest/pest:^3.0
         if: ${{ matrix.php-version == '8.4' }}
@@ -51,7 +58,7 @@ jobs:
         uses: codecov/codecov-action@v4
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          env_vars: PHP_VERSION
+          env_vars: PHP_VERSION,TWIG_VERSION
           file: ./coverage.xml
           flags: unittests
           fail_ci_if_error: false
