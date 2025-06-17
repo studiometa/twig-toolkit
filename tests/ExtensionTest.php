@@ -49,3 +49,13 @@ test('The `twig_toolkit_url` function should not encode URL parameters', functio
     test()->loader->setTemplate('index', $tpl);
     expect(test()->twig->render('index'))->toBe('/foo/bar?twic=v1/output=preview');
 });
+
+test('The `twig_toolkit_without` filter removes keys from the given object', function () {
+    $tpl = <<<EOD
+    {% set result = { foo: 'foo', bar: 'baz', buz: 'buz', fee: true }|twig_toolkit_without('bar', 'buz', 'biz') %}
+    {{ result|keys|join(', ') }}
+    EOD;
+
+    test()->loader->setTemplate('index', $tpl);
+    expect(test()->twig->render('index'))->toBe('foo, fee');
+});

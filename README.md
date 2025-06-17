@@ -163,6 +163,27 @@ Wrapper for the `Spatie\Url\Url` class to easily manipulate URLs. See the [`spat
 {% set url = twig_toolkit_url(url).withQueryParameter('key', 'value') %}
 ```
 
+### Filters
+
+#### `{{ object|twig_toolkit_without('key', 'other_key') }}`
+
+Returns the given hash without the specified keys.
+
+**Params**
+
+- `value` (`array`): the hash to remove the key from
+- `...keys` (`string[]`): the keys to remove
+
+**Examples**
+
+```twig
+{# Twig #}
+{{ { foo: 1, bar: 2, baz: 3 }|twig_toolkit_without('bar')|keys|join(', ') }}
+
+{# HTML #}
+foo, baz
+```
+
 ### Tags
 
 #### `{% html_element '<tag>' with attrs %}`

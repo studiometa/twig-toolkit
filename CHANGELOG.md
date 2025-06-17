@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+### Added
+
+- Add a `twig_toolkit_without` filter ([#36](https://github.com/studiometa/twig-toolkit/pull/36), [b2842a2](https://github.com/studiometa/twig-toolkit/commit/b2842a2))
+
 ### Fixed
 
 - Fix Twig 3.21 deprecations ([#35](https://github.com/studiometa/twig-toolkit/pull/35), [6687590](https://github.com/studiometa/twig-toolkit/commit/6687590))
