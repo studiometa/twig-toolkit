@@ -37,13 +37,17 @@ final class ElementTokenParser extends AbstractTokenParser
         $stream = $this->parser->getStream();
 
         /** @var \Twig\Node\Expression\AbstractExpression */
-        $name = $this->parser->getExpressionParser()->parseExpression();
+        $name = method_exists($this->parser, 'parseExpression')
+            ? $this->parser->parseExpression()
+            : $this->parser->getExpressionParser()->parseExpression();
 
         /** @var null|\Twig\Node\Expression\AbstractExpression */
         $variables = null;
         if ($stream->nextIf(Token::NAME_TYPE, 'with')) {
             /** @var \Twig\Node\Expression\AbstractExpression */
-            $variables = $this->parser->getExpressionParser()->parseExpression();
+            $variables = method_exists($this->parser, 'parseExpression')
+                ? $this->parser->parseExpression()
+                : $this->parser->getExpressionParser()->parseExpression();
         }
 
         $stream->expect(Token::BLOCK_END_TYPE);
