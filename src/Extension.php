@@ -12,6 +12,7 @@ use Studiometa\TwigToolkit\Helpers\Url;
 use Studiometa\TwigToolkit\TokenParser\ElementTokenParser;
 use Twig\Extension\AbstractExtension;
 use Twig\TokenParser\TokenParserInterface;
+use Twig\TwigFilter;
 use Twig\TwigFunction;
 
 /**
@@ -57,6 +58,21 @@ class Extension extends AbstractExtension
                 'twig_toolkit_url',
                 [Url::class, 'fromString'],
             ),
+        ];
+    }
+
+    public function getFilters()
+    {
+        return [
+            new TwigFilter('twig_toolkit_without', function (array $array, string ...$keys) {
+                $clone = $array;
+
+                foreach ($keys as $key) {
+                    unset($clone[$key]);
+                }
+
+                return $clone;
+            }),
         ];
     }
 }
