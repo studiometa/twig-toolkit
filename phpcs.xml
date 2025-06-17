@@ -4,6 +4,9 @@
   <exclude-pattern>/vendor/</exclude-pattern>
 
   <file>src</file>
+  <arg name="colors" />
+  <arg name="cache" />
+  <arg value="sp" />
 
   <!--
     Ending tags '?>' can be really painful to debug.
