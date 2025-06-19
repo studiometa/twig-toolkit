@@ -16,3 +16,7 @@ test('The `Url` class should work with null given as $url', function () {
 test('The `Url` class should not encode URL parameters', function () {
     expect((string)Url::fromString('http://localhost/?key=value&foo=1/2'))->toBe('http://localhost?key=value&foo=1/2');
 });
+
+test('The `Url::withQuery` method should replace the current query', function() {
+    expect((string)Url::fromString('http://localhost/?key=value&foo=1/2')->withQuery('foo=bar'))->toBe('http://localhost?foo=bar');
+});
