@@ -217,6 +217,13 @@ class Html
                 continue;
             }
 
+            $value = trim($value);
+
+            // Prevent printing empty style or class attributes
+            if (($key === 'style' || $key === 'class') && $value === '') {
+                continue;
+            }
+
             $renderedAttributes[] = sprintf('%s="%s"', $key, $value);
         }
 
