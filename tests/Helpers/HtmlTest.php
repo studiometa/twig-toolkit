@@ -1,5 +1,7 @@
 <?php
 
+use Studiometa\TwigToolkit\Helpers\Html;
+
 use function Spatie\Snapshots\assertMatchesSnapshot;
 
 beforeEach(function () {
@@ -198,4 +200,11 @@ test('The `{{ merge_html_attributes(attr) }}` Twig filter should merge default a
     EOD;
     test()->loader->setTemplate('index', $tpl);
     assertMatchesSnapshot(test()->twig->render('index'));
+});
+
+
+test('The Html::renderAttributes() method does not print empty class or style attribute', function() {
+    expect(Html::renderAttributes(test()->twig, ['class' => 'foo', 'style' => '', 'id' => '']))->toBe(' class="foo" id=""');
+    expect(Html::renderAttributes(test()->twig, ['class' => ' ', 'id' => '']))->toBe(' id=""');
+    expect(Html::renderAttributes(test()->twig, ['class' => '', 'style' => ['display' => 'none'], 'id' => '']))->toBe(' style="display: none;" id=""');
 });
